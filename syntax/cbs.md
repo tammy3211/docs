@@ -10,7 +10,7 @@ The syntaxes are case-insensitive, so `{{user}}`, `{{User}}`, and `{{USER}}` are
 Some of the syntaxes require parameters, which are separated by `::` (two colons).
 
 Some of the syntaxes require arrays as parameters. use `{{array::A::B::C...}}` syntax to create an array.
-Some of the syntaxes are block syntaxes (like `{{#if A}}`), which are started with `{{#NAME A}}` and ended with `{{/NAME}}`. The block syntaxes can be nested, and starts with `#`. it can also be closed with `{{/}}` instead of `{{/NAME}}`. block syntaxes's content's indentation and whitespace would be trimmed, unless for some syntaxes like `{{#if-pure A}}` which would keep the indentation and whitespace.
+Some of the syntaxes are block syntaxes (like `{{#if A}}`), which are started with `{{#NAME A}}` and ended with `{{/NAME}}`. The block syntaxes can be nested, and starts with `#`. it can also be closed with `{{/}}` instead of `{{/NAME}}`. block syntaxes's content's indentation and whitespace would be trimmed, unless for some syntaxes like `{{#if_pure A}}` which would keep the indentation and whitespace.
 
 ## Data Syntaxes
 
@@ -74,9 +74,9 @@ This will be replaced with the current auxiliary model id of the client.
 This will be replaced with the current role of the message sender.
 If the `{{role}}` is used in non-chat context, it will be replaced with `role` string.
 
-### `{{maxprompt}}`
+### `{{maxcontext}}`
 
-This will be replaced with the maxinum tokens setting of the client.
+This will be replaced with the maximum context length setting of the client.
 
 ### `{{lastmessage}}`
 
@@ -630,13 +630,13 @@ This would trim all non-numeric characters except for `.`. This doesn't guarante
 
 If this syntax is provided, the message will be replaced with `A` and the rest of the message will be ignored.
 
-### `{{func::A::B::C...}}`
+### `{{call::A::B::C...}}`
 
 This will be replaced with the result of the function `A` with arguments `B`, `C`, and so on.
 
 ### `{{arg::A}}`
 
-This will be replaced with the argument index `A` of the function if it is called with `{{func::A::B::C...}}`.
+This will be replaced with the argument index `A` of the function if it is called with `{{call::A::B::C...}}`.
 
 ## Block Syntaxes
 
@@ -651,7 +651,7 @@ Hello Alice!
 {{/if}}
 ```
 
-### `{{#if-pure A}}`
+### `{{#if_pure A}}`
 
 Same as `{{#if A}}`, but it would keep the indentation and whitespace of the content.
 
@@ -678,9 +678,9 @@ chickenpizzahamburger
     }
 </style>
 
-### `{{#func A}}`
+### `{{#call A}}`
 
-This will be replaced with the result of the function `A`. The function can be called with `{{func::A::B::C...}}`.
+This will be replaced with the result of the function `A`. The function can be called with `{{call::A::B::C...}}`.
 
 ### `{{#pure_display}}`
 
