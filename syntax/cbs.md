@@ -586,7 +586,7 @@ This will be replaced with the value of the global variable `A`. If the global v
 
 This will be replaced with an array of `B`, `C`, and so on. This can be used to create an array from multiple parameters.
 
-Currently array uses `§` as separator, but this might change in the future. so it is recommended to use this syntax instead of using `§` directly.
+For compatibility, strings that are not JSON arrays may be split by `§`, but using `§` directly is not recommended.
 
 ### `{{array_length::A}}`
 
@@ -611,9 +611,9 @@ This will be replaced with array `A` with the last element removed.
 
 This will be replaced with array `A` with the first element removed.
 
-### `{{array_splice::A::B::C::D...}}`
+### `{{array_splice::A::B::C::D}}`
 
-This will be replaced with array `A` with `C`, `D`, and so on inserted at index `B`.
+This will be replaced with array `A` after removing `C` elements starting at index `B` and inserting element `D` at that position.
 
 ### `{{array_assert::A::B::C}}`
 
@@ -740,7 +740,30 @@ This will be replaced with a deterministic 7-digit number generated from `A`. Th
 
 ### `{{metadata::A}}`
 
-This will be replaced with metadata value `A`. Supported keys include `mobile`, `local`, `node`, `version`, `majorversion`, `majorver`, `major`, `language`, `locale`, `lang`, `browserlanguage`, `browserlocale`, `browserlang`, `modelshortname`, `modelname`, `modelinternalid`, `modelformat`, `modelprovider`, `modeltokenizer`, `risutype`, and `maxcontext`.
+This will be replaced with metadata value `A`.
+
+<details>
+<summary>Supported metadata keys</summary>
+
+| Key | Description |
+| --- | --- |
+| `mobile` | Returns `1` in a mobile environment, otherwise `0`. |
+| `local` | Returns `1` in a local app environment, otherwise `0`. |
+| `node` | Returns `1` in a Node server environment, otherwise `0`. |
+| `version` | Returns the app version. |
+| `majorversion`, `majorver`, `major` | Returns only the first number of the app version. |
+| `language`, `locale`, `lang` | Returns the language value configured in the app. |
+| `browserlanguage`, `browserlocale`, `browserlang` | Returns the browser language value. |
+| `modelshortname` | Returns the short name of the current model. |
+| `modelname` | Returns the current model name. |
+| `modelinternalid` | Returns the internal ID of the current model. |
+| `modelformat` | Returns the format value of the current model. |
+| `modelprovider` | Returns the provider value of the current model. |
+| `modeltokenizer` | Returns the tokenizer value of the current model. |
+| `risutype` | Returns the runtime environment as one of `local`, `node`, or `web`. |
+| `maxcontext` | Returns the current maximum context length. |
+
+</details>
 
 If `A` is not a valid metadata key, this will be replaced with an error string.
 
