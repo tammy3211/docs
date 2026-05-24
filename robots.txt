@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tammy3211.github.io/docs/sitemap.xml

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="turbo-root" content="/docs">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="4.5.3.832949984503">
+
+    <!-- See retype.com -->
+    <meta name="generator" content="Retype 4.5.3">
+
+    <!-- Primary Meta Tags -->
+    <title>Trigger Script (Lua Mode)</title>
+    <meta name="title" content="Trigger Script (Lua Mode)">
+    <meta name="description" content="On trigger script lua mode, you can write a lua script to handle the trigger event. The script will be executed when the trigger event is triggered.">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://tammy3211.github.io/docs/srp/lua/">
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://tammy3211.github.io/docs/sitemap.xml">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tammy3211.github.io/docs/srp/lua/">
+    <meta property="og:title" content="Trigger Script (Lua Mode)">
+    <meta property="og:description" content="On trigger script lua mode, you can write a lua script to handle the trigger event. The script will be executed when the trigger event is triggered.">
+    <meta property="og:site_name" content="RisuAI">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://tammy3211.github.io/docs/srp/lua/">
+    <meta name="twitter:title" content="Trigger Script (Lua Mode)">
+    <meta name="twitter:description" content="On trigger script lua mode, you can write a lua script to handle the trigger event. The script will be executed when the trigger event is triggered.">
+
+    <!-- Alternate Markdown -->
+    <link rel="alternate" type="text/markdown" href="https://tammy3211.github.io/docs/srp/lua.md">
+
+    <script data-cfasync="false">(function(){var cl=document.documentElement.classList,ls=localStorage.getItem("retype_scheme"),hd=cl.contains("dark"),hl=cl.contains("light"),wm=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches;if(ls==="dark"||(!ls&&wm&&!hd&&!hl)){cl.remove("light");cl.add("dark")}else if(ls==="light"||(!ls&&!wm&&!hd&&!hl)){cl.remove("dark");cl.add("light")}})();</script>
+
+    <link id="retype-favicon" rel="icon" href="../../favicon.ico" />
+    <link href="../../resources/css/retype.css?v=4.5.3.832949984503" rel="stylesheet">
+
+    <script data-cfasync="false" src="../../resources/js/config.js?v=4.5.3.832949984503" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../../resources/js/retype.js?v=4.5.3" data-turbo-eval="false" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../../resources/js/lunr.js?v=4.5.3.832949984503" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../../resources/js/prism.js?v=4.5.3.832949984503" defer></script>
+</head>
+<body>
+    <div id="retype-app" class="relative text-base antialiased text-base-text bg-base-bg font-body">
+    <div class="absolute bottom-0 left-0" style="top: 5rem; right: 50%"></div>
+
+    <header id="retype-header" class="sticky top-0 z-30 flex w-full h-16 bg-header-bg border-b border-header-border md:h-20">
+        <div class="container relative flex items-center justify-between pr-6 grow md:justify-start">
+            <!-- Mobile menu button skeleton -->
+            <button v-cloak class="skeleton retype-mobile-menu-button flex items-center justify-center shrink-0 overflow-hidden dark:text-white focus:outline-hidden rounded-full w-10 h-10 ml-3.5 md:hidden"><svg xmlns="http://www.w3.org/2000/svg" class="mb-px shrink-0" width="24" height="24" viewBox="0 0 24 24" role="presentation" style="margin-bottom: 0px;"><g fill="currentColor"><path d="M2 4h20v2H2zM2 11h20v2H2zM2 18h20v2H2z"></path></g></svg></button>
+            <div v-cloak id="retype-sidebar-left-toggle-button"></div>
+    
+            <!-- Logo -->
+            <div class="flex items-center justify-between h-full py-2 md:w-75">
+                <div class="flex items-center px-2 md:px-6">
+                    <a id="retype-branding-logo" href="https://tammy3211.github.io/docs/" class="flex items-center leading-snug text-2xl">
+                        <span class="dark:text-white font-bold line-clamp-1 md:line-clamp-2">RisuAI</span>
+                    </a><span id="retype-branding-label" class="inline-flex mt-1 px-2 py-1 ml-4 text-xs font-medium leading-none items-center rounded-md bg-branding-label-bg text-branding-label-text ring-1 ring-branding-label-border ring-inset md:inline-block">Docs</span>
+                </div>
+    
+                <span class="hidden h-8 border-r md:inline-block border-base-border"></span>
+            </div>
+    
+            <div class="flex justify-between md:grow">
+                <!-- Top Nav -->
+                <nav id="retype-header-nav" class="hidden md:flex">
+                    <ul class="flex flex-col mb-4 md:pl-16 md:mb-0 md:flex-row md:items-center">
+                        <li class="mr-6">
+                            <a class="py-2 md:mb-0 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="https://retype.com/guides/getting-started/">Getting Started</a>
+                        </li>
+    
+                    </ul>
+                </nav>
+    
+                <div v-cloak class="flex justify-end grow">
+                    <div id="retype-mobile-search-button"></div>
+                    <doc-search-desktop></doc-search-desktop>
+    
+                    <doc-theme-switch class="lg:ml-2"></doc-theme-switch>
+                    <doc-history></doc-history>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <div id="retype-container" class="container relative flex bg-white">
+        <!-- Sidebar Skeleton -->
+        <div v-cloak class="fixed flex flex-col shrink-0 duration-300 ease-in-out bg-sidebar-left-bg border-sidebar-left-border sidebar top-20 w-75 border-r h-screen md:sticky transition-transform skeleton">
+        
+            <div class="flex items-center h-16 px-6">
+                <input id="retype-filter-input-mock" class="w-full h-10 pl-8 px-3 py-2 transition-colors duration-200 ease-linear bg-filter-bg border border-filter-border rounded-lg shadow-none md:text-sm hover:border-filter-border-hover focus:outline-hidden focus:border-filter-border-focus placeholder-filter-placeholder" type="text">
+            </div>
+        
+            <div class="pl-6 mt-1 mb-4">
+                <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+                <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+            </div>
+        
+            <div class="shrink-0 mt-auto bg-transparent dark:border-base-border">
+                <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                    <span class="text-xs whitespace-nowrap">Powered by</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Sidebar component -->
+        <doc-sidebar v-cloak>
+            <template #sidebar-footer>
+                <div class="shrink-0 mt-auto border-t md:bg-transparent md:border-none dark:border-base-border">
+        
+                    <div class="py-3 px-6 md:hidden border-b dark:border-base-border">
+                        <nav>
+                            <ul class="flex flex-wrap justify-center items-center">
+                                <li class="mr-6">
+                                    <a class="block py-1 inline-flex items-center text-sm whitespace-nowrap transition-colors duration-200 ease-linear md:text-header-text font-header-text hover:text-header-text-hover" href="https://retype.com/guides/getting-started/">Getting Started</a>
+                                </li>
+        
+                            </ul>
+                        </nav>
+                    </div>
+        
+                    <a class="flex items-center justify-center flex-nowrap h-16 text-gray-350 dark:text-dark-400 hover:text-gray-600 dark:hover:text-dark-300 transition-colors duration-150 ease-in docs-powered-by" target="_blank" href="https://retype.com/" rel="noopener">
+                        <span class="text-xs whitespace-nowrap">Powered by</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-2" fill="currentColor" width="96" height="20" overflow="visible"><path d="M0 0v20h13.59V0H0zm11.15 17.54H2.44V2.46h8.71v15.08zM15.8 20h2.44V4.67L15.8 2.22zM20.45 6.89V20h2.44V9.34z"/><g><path d="M40.16 8.44c0 1.49-.59 2.45-1.75 2.88l2.34 3.32h-2.53l-2.04-2.96h-1.43v2.96h-2.06V5.36h3.5c1.43 0 2.46.24 3.07.73s.9 1.27.9 2.35zm-2.48 1.1c.26-.23.38-.59.38-1.09 0-.5-.13-.84-.4-1.03s-.73-.28-1.39-.28h-1.54v2.75h1.5c.72 0 1.2-.12 1.45-.35zM51.56 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92h4.74v1.83h-6.79V5.36h6.64zM60.09 7.15v7.48h-2.06V7.15h-2.61V5.36h7.28v1.79h-2.61zM70.81 14.64h-2.06v-3.66l-3.19-5.61h2.23l1.99 3.45 1.99-3.45H74l-3.19 5.61v3.66zM83.99 6.19c.65.55.97 1.4.97 2.55s-.33 1.98-1 2.51-1.68.8-3.04.8h-1.23v2.59h-2.06V5.36h3.26c1.42 0 2.45.28 3.1.83zm-1.51 3.65c.25-.28.37-.69.37-1.22s-.16-.92-.48-1.14c-.32-.23-.82-.34-1.5-.34H79.7v3.12h1.38c.68 0 1.15-.14 1.4-.42zM95.85 5.36V7.2h-4.59v1.91h4.13v1.76h-4.13v1.92H96v1.83h-6.79V5.36h6.64z"/></g></svg>
+                    </a>
+                </div>
+            </template>
+        </doc-sidebar>
+
+        <div class="grow min-w-0 bg-body-bg">
+            <!-- Render "toolbar" template here on api pages --><!-- Render page content -->
+<div class="flex">
+    <div id="retype-main" class="min-w-0 p-4 grow md:px-16">
+        <main class="relative pb-12 lg:pt-2">
+            <div class="relative retype-markdown" id="retype-content">
+                <!-- Rendered if sidebar right is enabled -->
+                <div id="retype-sidebar-right-toggle"></div>
+                <doc-page-actions></doc-page-actions>
+
+                <!-- Page content  -->
+<h1 id="trigger-script-lua-mode">Trigger Script (Lua Mode)</h1>
+<p>On trigger script lua mode, you can write a lua script to handle the trigger event. The script will be executed when the trigger event is triggered.</p>
+<h2 id="callback-function">Callback Function</h2>
+<p>There are three normal callback functions you can use in the lua script:</p>
+<ul>
+<li><code translate="no" v-pre>onStart(triggerId)</code>: This function will be called when chat is sent.</li>
+<li><code translate="no" v-pre>onOutput(triggerId)</code>: This function will be called when AI response is received.</li>
+<li><code translate="no" v-pre>onInput(triggerId)</code>: This function will be called when user input is received.</li>
+</ul>
+<p>For button events (like <code translate="no" v-pre>{{button::Display::TriggerName}}</code>), it calls the function with same name as TriggerName.</p>
+<p>You can also use <code translate="no" v-pre>listenEdit(type, callback)</code> to listen for edit events. The type can be <code translate="no" v-pre>editRequest</code>, <code translate="no" v-pre>editDisplay</code>, <code translate="no" v-pre>editInput</code>, and <code translate="no" v-pre>editOutput</code>. The callback function will be <code translate="no" v-pre>callback(triggerId, data)</code>.</p>
+<h3 id="example">Example</h3>
+<div id="example-code-1" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-lua"><code v-pre class="language-lua">function onInput(triggerId)
+    alertNormal(triggerId, &quot;input received!&quot;)
+end</code></pre>
+</doc-codeblock></div>
+<p>The above script will make an alert with the message <code translate="no" v-pre>input received!</code> when user input is received.</p>
+<div id="example-code-2" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-lua"><code v-pre class="language-lua">listenEdit(&quot;editDisplay&quot;, function(triggerId, data)
+    local prefix = getState(triggerId, &quot;prefix&quot;) or &quot;&quot;
+    return prefix .. data
+end)</code></pre>
+</doc-codeblock></div>
+<p>The above script will append prefix from the state variable to the display message.</p>
+<div id="example-code-3" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-lua"><code v-pre class="language-lua">function onButton(triggerId)
+    alertNormal(triggerId, &quot;button clicked!&quot;)
+end</code></pre>
+</doc-codeblock></div>
+<p>The above script will make an alert with the message <code translate="no" v-pre>button clicked!</code> when the button <code translate="no" v-pre>{{button::Display::onButton}}</code> is clicked.</p>
+<h2 id="added-functions">Added Functions</h2>
+<p>You can use the following functions in the lua script. Every function except <code translate="no" v-pre>log</code> must be called with the <code translate="no" v-pre>triggerId</code> as the first argument for security reasons. you can get the <code translate="no" v-pre>triggerId</code> from the callback function.</p>
+<p>All functions except <code translate="no" v-pre>setChatVar</code>, <code translate="no" v-pre>getChatVar</code>, <code translate="no" v-pre>setState</code>, <code translate="no" v-pre>getState</code>, <code translate="no" v-pre>log</code> would not work in editDisplay event.</p>
+<h3 id="logmessage"><code translate="no" v-pre>log(message)</code></h3>
+<p>Log the message to the console. unlike <code translate="no" v-pre>print</code>, this outputs as a JSON format, making arrays and objects display correctly in the devtools console.</p>
+<h3 id="setchatvartriggerid-key-value"><code translate="no" v-pre>setChatVar(triggerId, key, value)</code></h3>
+<p>Set a chat variable with the key and value. value must be a string.</p>
+<h3 id="getchatvartriggerid-key"><code translate="no" v-pre>getChatVar(triggerId, key)</code></h3>
+<p>Get the value of a chat variable with the key.</p>
+<h3 id="setstatetriggerid-key-value"><code translate="no" v-pre>setState(triggerId, key, value)</code></h3>
+<p>Set a state variable with the key and value. value must be a JSON serializable. (like string, number, boolean, array, object)</p>
+<h3 id="getstatetriggerid-key"><code translate="no" v-pre>getState(triggerId, key)</code></h3>
+<p>Get the value of a state variable with the key.</p>
+<h3 id="stopchattriggerid"><code translate="no" v-pre>stopChat(triggerId)</code></h3>
+<p>Stop the chat. this only works on some trigger events.</p>
+<h3 id="alerterrortriggerid-message"><code translate="no" v-pre>alertError(triggerId, message)</code></h3>
+<p>Show an error alert with the message.</p>
+<h3 id="alertnormaltriggerid-message"><code translate="no" v-pre>alertNormal(triggerId, message)</code></h3>
+<p>Show a normal alert with the message.</p>
+<h3 id="alertinputtriggerid-message"><code translate="no" v-pre>alertInput(triggerId, message)</code></h3>
+<p>Show an input alert with the message, and return the input value.</p>
+<h3 id="setchattriggerid-index-message"><code translate="no" v-pre>setChat(triggerId, index, message)</code></h3>
+<p>Set the chat message at the index. index starts from 0.</p>
+<h3 id="setchatroletriggerid-index-role"><code translate="no" v-pre>setChatRole(triggerId, index, role)</code></h3>
+<p>Set the chat role at the index. index starts from 0. role can be <code translate="no" v-pre>user</code> and <code translate="no" v-pre>char</code>.</p>
+<h3 id="cutchattriggerid-start-end"><code translate="no" v-pre>cutChat(triggerId, start, end)</code></h3>
+<p>Cut the chat message from start to end. start and end are both 0-based index.
+to cut only one message, use <code translate="no" v-pre>removeChat(triggerId, index)</code>.</p>
+<h3 id="removechattriggerid-index"><code translate="no" v-pre>removeChat(triggerId, index)</code></h3>
+<p>Remove the chat message at the index. index starts from 0.</p>
+<h3 id="addchattriggerid-role-message"><code translate="no" v-pre>addChat(triggerId, role, message)</code></h3>
+<p>Add a chat message with the message and role. role can be <code translate="no" v-pre>user</code> and <code translate="no" v-pre>char</code>.</p>
+<h3 id="insertchattriggerid-index-role-message"><code translate="no" v-pre>insertChat(triggerId, index, role, message)</code></h3>
+<p>Insert a chat message at the index with the message and role. index starts from 0. role can be <code translate="no" v-pre>user</code> and <code translate="no" v-pre>char</code>.</p>
+<h3 id="removechattriggerid-index-1"><code translate="no" v-pre>removeChat(triggerId, index)</code></h3>
+<p>Remove the chat message at the index. index starts from 0.</p>
+<h3 id="getchatlengthtriggerid"><code translate="no" v-pre>getChatLength(triggerId)</code></h3>
+<p>Get the chat length.</p>
+<h3 id="getfullchattriggerid"><code translate="no" v-pre>getFullChat(triggerId)</code></h3>
+<p>Get the full chat message, with the format of:</p>
+<div id="getfullchattriggerid-code-1" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-lua"><code v-pre class="language-lua">{
+    {role = &quot;user&quot;, data = &quot;user message&quot;},
+    {role = &quot;char&quot;, data = &quot;char message&quot;},
+    ...
+}</code></pre>
+</doc-codeblock></div>
+<h3 id="setfullchattriggerid-chat"><code translate="no" v-pre>setFullChat(triggerId, chat)</code></h3>
+<p>Set the full chat message, with the format of:</p>
+<div id="setfullchattriggerid-chat-code-1" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-lua"><code v-pre class="language-lua">{
+    {role = &quot;user&quot;, data = &quot;user message&quot;},
+    {role = &quot;char&quot;, data = &quot;char message&quot;},
+    ...
+}</code></pre>
+</doc-codeblock></div>
+<h3 id="getnametriggerid"><code translate="no" v-pre>getName(triggerId)</code></h3>
+<p>Returns the name of the current character.</p>
+<h3 id="setnametriggerid-name"><code translate="no" v-pre>setName(triggerId, name)</code></h3>
+<p>Set the name of the current character.</p>
+<h3 id="getdescriptiontriggerid"><code translate="no" v-pre>getDescription(triggerId)</code></h3>
+<p>Returns the description of the current character.</p>
+<h3 id="setdescriptiontriggerid-description"><code translate="no" v-pre>setDescription(triggerId, description)</code></h3>
+<p>Set the description of the current character.</p>
+<h3 id="getcharacterfirstmessagetriggerid"><code translate="no" v-pre>getCharacterFirstMessage(triggerId)</code></h3>
+<p>Returns the first message of the current character.</p>
+<h3 id="setcharacterfirstmessagetriggerid-message"><code translate="no" v-pre>setCharacterFirstMessage(triggerId, message)</code></h3>
+<p>Set the first message of the current character.</p>
+<h3 id="getbackgroundembeddingtriggerid"><code translate="no" v-pre>getBackgroundEmbedding(triggerId)</code></h3>
+<p>Returns the background embedding of the current character.</p>
+<h3 id="setbackgroundembeddingtriggerid-embedding"><code translate="no" v-pre>setBackgroundEmbedding(triggerId, embedding)</code></h3>
+<p>Set the background embedding of the current character.</p>
+<h3 id="similaritytriggerid-source-value"><code translate="no" v-pre>similarity(triggerId, source, value)</code></h3>
+<blockquote>
+<p>This function requires low level access.</p>
+</blockquote>
+<p>Perform a similarity sort between the source and value.
+source must be a array of strings, and value must be a string.
+return a array of index sorted by similarity.</p>
+<p>This is a async function. use <code translate="no" v-pre>similarity(triggerId, source, value):await()</code> to wait for the result.</p>
+<h3 id="generateimagetriggerid-prompt-negative"><code translate="no" v-pre>generateImage(triggerId, prompt, negative)</code></h3>
+<blockquote>
+<p>This function requires low level access.</p>
+</blockquote>
+<p>Generate an image with the prompt and negative. returns the asset CBS (like <code translate="no" v-pre>{{asset::assetId}}</code>).</p>
+<p>This is a async function. use <code translate="no" v-pre>generateImage(triggerId, prompt, negative):await()</code> to wait for the result.</p>
+<h3 id="llmtriggerid-data"><code translate="no" v-pre>LLM(triggerId, data)</code></h3>
+<blockquote>
+<p>This function requires low level access.</p>
+</blockquote>
+<p>Performs a llm request with the data. returns the response.</p>
+<p>data must be a message format, with the format of:</p>
+<div id="llmtriggerid-data-code-1" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-lua"><code v-pre class="language-lua">{
+    -- the message role, can be &quot;system&quot;, &quot;assistant&quot;, &quot;user&quot;
+    {
+        role = &quot;system&quot;,
+        data = &quot;system message&quot;
+    },
+    {
+        role = &quot;assistant&quot;,
+        data = &quot;char message&quot;
+    },
+    {
+        role = &quot;user&quot;,
+        data = &quot;user message&quot;
+    }
+    ...
+}</code></pre>
+</doc-codeblock></div>
+<p>the response format is:</p>
+<div id="llmtriggerid-data-code-2" class="codeblock-wrapper"><doc-codeblock>
+<pre translate="no" class="language-lua"><code v-pre class="language-lua">{
+    success = true,
+    message = &quot;response message&quot;,
+}</code></pre>
+</doc-codeblock></div>
+<p>This is a async function. use <code translate="no" v-pre>LLM(triggerId, data):await()</code> to wait for the result.</p>
+<h3 id="simplellmtriggerid-message"><code translate="no" v-pre>simpleLLM(triggerId, message)</code></h3>
+<blockquote>
+<p>This function requires low level access.</p>
+</blockquote>
+<p>Performs a simple llm request with the message. returns the response.
+both the message and response format is string.</p>
+<p>This is a async function. use <code translate="no" v-pre>simpleLLM(triggerId, message):await()</code> to wait for the result.</p>
+<h2 id="tips">Tips</h2>
+<ul>
+<li>If you do not know how to write a lua script, you can refer to the <a href="https://www.lua.org/manual/5.4/">lua manual</a> or ask for help to the AI chatbot like RisuAI chat playground.</li>
+<li>Since the application only offers a small GUI for the lua script, we recommend using an external editor like <a href="https://code.visualstudio.com/">VSCode</a> for writing the script, and then copy and paste it to the application.</li>
+<li>We recommend using <code translate="no" v-pre>log</code> instead of <code translate="no" v-pre>alert</code> or <code translate="no" v-pre>print</code> for debugging, as it will not disturb other functions, and displays the data in a more readable format.</li>
+<li>We recommend using <code translate="no" v-pre>setState</code> and <code translate="no" v-pre>getState</code> to store data more than <code translate="no" v-pre>setChatVar</code> and <code translate="no" v-pre>getChatVar</code>, as it supports more data types.</li>
+<li>Every time the trigger event is triggered, the lua script will be executed from the beginning. So if you want to keep some data, you must use chat variables or state variables.</li>
+<li><a href="https://github.com/rxi/json.lua">json.lua</a> is included in the lua environment, so you can use <code translate="no" v-pre>json.encode</code> and <code translate="no" v-pre>json.decode</code> to serialize and deserialize JSON data.</li>
+<li>The lua script is executed in a sandbox environment, so you can&#x27;t access the file system or network.</li>
+<li>You can&#x27;t use external libraries except the included <code translate="no" v-pre>json.lua</code>.</li>
+<li>If error occurs in the lua script, the application will work as if the script is not executed, and the error message will be displayed in the console.</li>
+<li>The Lua version is based on <a href="https://www.lua.org/manual/5.4/">Lua 5.4</a></li>
+</ul>
+
+                
+                <!-- Required only on API pages -->
+                <doc-toolbar-member-filter-no-results></doc-toolbar-member-filter-no-results>
+            </div>
+            <footer id="retype-content-footer" class="clear-both">
+            
+                <nav id="retype-nextprev" class="print:hidden flex mt-14">
+                    <div class="w-1/2">
+                        <a class="px-5 py-4 h-full flex items-center break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-l-lg transition-colors duration-150 relative hover:z-5" href="../../srp/regex/">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="mr-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19 11H7.41l5.29-5.29a.996.996 0 10-1.41-1.41l-7 7a1 1 0 000 1.42l7 7a1.024 1.024 0 001.42-.01.996.996 0 000-1.41L7.41 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                            <span>
+                                <span class="block text-xs font-normal text-base-text-muted">Previous</span>
+                                <span class="block mt-1">Regex Scripts</span>
+                            </span>
+                        </a>
+                    </div>
+            
+                    <div class="w-1/2">
+                        <a class="px-5 py-4 -mx-px h-full flex items-center justify-end break-normal font-medium text-body-link border border-base-border hover:border-base-border-hover rounded-r-lg transition-colors duration-150 relative hover:z-5" href="../../srp/trigger/">
+                            <span>
+                                <span class="block text-xs font-normal text-right text-base-text-muted">Next</span>
+                                <span class="block mt-1">Trigger Scripts</span>
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="ml-3" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" overflow="visible"><path d="M19.92 12.38a1 1 0 00-.22-1.09l-7-7a.996.996 0 10-1.41 1.41l5.3 5.3H5c-.55 0-1 .45-1 1s.45 1 1 1h11.59l-5.29 5.29a.996.996 0 000 1.41c.19.2.44.3.7.3s.51-.1.71-.29l7-7c.09-.09.16-.21.21-.33z" /><path fill="none" d="M0 0h24v24H0z" /></svg>
+                        </a>
+                    </div>
+                </nav>
+            </footer>
+        </main>
+
+        <div id="retype-page-footer" class="print:border-none border-t border-base-border pt-6 mb-8">
+            <footer class="flex flex-wrap items-center justify-between print:justify-center">
+                <div id="retype-footer-links" class="print:hidden">
+                    <ul class="flex flex-wrap items-center text-sm">
+                    </ul>
+                </div>
+                <div id="retype-copyright" class="print:justify-center py-2 text-footer-text font-footer-link text-sm leading-relaxed"><p>© Copyright 2026. All rights reserved.</p></div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Rendered if sidebar right is enabled -->
+    <!-- Sidebar right skeleton-->
+    <div v-cloak class="fixed top-0 bottom-0 right-0 translate-x-full bg-sidebar-right-bg border-sidebar-right-border lg:sticky lg:border-l lg:shrink-0 lg:pt-6 lg:translate-x-0 sm:w-1/2 lg:w-64 lg:z-0 md:w-104 sidebar-right skeleton">
+        <div class="pl-5">
+            <div class="w-32 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+            <div class="w-48 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+            <div class="w-40 h-3 mb-4 bg-skeleton-bg rounded-full loading"></div>
+        </div>
+    </div>
+
+    <!-- User should be able to hide sidebar right -->
+    <doc-sidebar-right v-cloak></doc-sidebar-right>
+</div>
+
+        </div>
+    </div>
+
+    <doc-search-mobile></doc-search-mobile>
+    <doc-back-to-top></doc-back-to-top>
+</div>
+
+
+    <div id="retype-overlay-target"></div>
+
+        <script data-cfasync="false">window.__DOCS__ = { "title": "Trigger Script (Lua Mode)", level: 2, icon: "file", hasPrism: true, hasInstagram: false, hasMermaid: false, hasMath: false, tocDepth: 23, "md": "/srp/lua.md" }</script>
+</body>
+</html>

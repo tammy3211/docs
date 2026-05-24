@@ -1,0 +1,37 @@
+﻿# Introduction
+
+> RisuAI, shortly Risu is a frontend or a platform with powerful features like Multiple API supports, Assets on chat, Regex functions and more.
+
+- [Introduction](https://tammy3211.github.io/docs/index.md): Introduction
+
+## Guides
+
+- [Making Bots (Basic)](https://tammy3211.github.io/docs/guides/making-bots.md): In this section,
+- [Common Errors](https://tammy3211.github.io/docs/guides/common-errors.md): Work in progress.
+
+## Character Config
+
+- [Basics](https://tammy3211.github.io/docs/characterconfig/basic.md): On the basics tab you can set the basic information about your character.
+- [Character Display](https://tammy3211.github.io/docs/characterconfig/character-display.md): On Character Display tab you can set the character icon and additional character screen settings.
+- [Lorebook](https://tammy3211.github.io/docs/characterconfig/lorebook.md): Lorebooks are collection of lore entries. Each entry is a piece of prompt that would be sent to the AI model. unlike character description, lore entries can use advanced conditions, mainly activation by keywords.
+- [Scripts](https://tammy3211.github.io/docs/characterconfig/scripts.md): For scripts, checkout the About Scripts, Regex Script and Trigger Script pages.
+- [TTS](https://tammy3211.github.io/docs/characterconfig/tts.md): TTS (Text to speech) makes character's response to a speech. the TTS settings (excluding API keys) are embeded to the character, making shared characters to have the same TTS settings.
+- [Advanced Settings](https://tammy3211.github.io/docs/characterconfig/advsettings.md): In Advanced Settings, you can configure powerful settings. however, for beginners, it is recommended to keep the default settings, since it can cause unexpected results.
+
+## Global Settings
+
+- [Chat Bot](https://tammy3211.github.io/docs/globalsettings/bots.md): On chat bot tab you can set the bot settings. like provider, prompt settings, and other. There is simple settings mode and advanced settings mode, which can be toggled by the switch on top of the page.
+- [Other Bots](https://tammy3211.github.io/docs/globalsettings/otherbots.md)
+- [Prompt Template](https://tammy3211.github.io/docs/globalsettings/prompttemplate.md)
+
+## Scripts
+
+- [About Scripts](https://tammy3211.github.io/docs/srp/about.md)
+- [Regex Scripts](https://tammy3211.github.io/docs/srp/regex.md)
+- [Trigger Script (Lua Mode)](https://tammy3211.github.io/docs/srp/lua.md): On trigger script lua mode, you can write a lua script to handle the trigger event. The script will be executed when the trigger event is triggered.
+- [Trigger Scripts](https://tammy3211.github.io/docs/srp/trigger.md): Trigger scripts are scripts that are runs its effect when a specific event occurs and conditions are met.
+
+## Syntax
+
+- [Curly Braced Syntaxes](https://tammy3211.github.io/docs/syntax/cbs.md): Curly braced syntaxes (like {{user}}) are used to insert special values into the text. The syntaxes can be used in almost any text field in the client, including chat messages, character descriptions, and lorebook entries.
+- [Markdown](https://tammy3211.github.io/docs/syntax/markdown.md): On Risuai, you can use Markdown to format your text. Markdown is a easy-to-read and easy-to-write syntax for styling text. We follow the CommonMark specification for Markdown.
