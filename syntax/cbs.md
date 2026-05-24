@@ -1,505 +1,509 @@
 # Curly Braced Syntaxes
 
-Curly braced syntaxes (like `{{user}}`) are used to insert special values into the text.
-The syntaxes can be used in almost any text field in the client, including chat messages, character descriptions, and lorebook entries.
+{{user}}와 같은 Curly braced syntaxes (이하 CBS)는 텍스트에 특수한 값을 삽입하는 데 사용됩니다.
+CBS는 거의 채팅 메시지, 캐릭터 설명, 로어북 등 거의 모든 텍스트 필드에서 사용할 수 있습니다.
 
-The syntaxes are replaced with the actual values when the message is sent or when the text is displayed in the client.
-The syntaxes can be nested and combined with other syntaxes, for example, `{{calc::{{getvar::a}}+{{getvar::b}}}}`.
+CBS는 메시지가 전송되거나, 텍스트가 클라이언트에 표시될 때 실제 값으로 대체됩니다.
+`{{calc::{{getvar::a}}+{{getvar::b}}}}`와 같이 CBS 구문은 중첩되거나 다른 구문과 조합될 수 있습니다.
 
-The syntaxes are case-insensitive, so `{{user}}`, `{{User}}`, and `{{USER}}` are all the same.
-Some of the syntaxes require parameters, which are separated by `::` (two colons).
+모든 구문은 대소문자를 구분하지 않습니다. 따라서 `{{user}}`, `{{User}}`, `{{USER}}`는 모두 동일합니다.
+몇 가지의 구문은 매개변수를 필요로 하는데, 매개변수는 `::` (콜론 두 개)로 구분됩니다.
 
-Some of the syntaxes require arrays as parameters. use `{{array::A::B::C...}}` syntax to create an array.
-Some of the syntaxes are block syntaxes (like `{{#if A}}`), which are started with `{{#NAME A}}` and ended with `{{/NAME}}`. The block syntaxes can be nested, and starts with `#`. it can also be closed with `{{/}}` instead of `{{/NAME}}`. block syntaxes's content's indentation and whitespace would be trimmed, unless for some syntaxes like `{{#if_pure A}}` which would keep the indentation and whitespace.
+몇 가지의 구문은 매개변수로 배열을 필요로 합니다. `{{array::A::B::C...}}` 구문을 사용하여 배열을 만들 수 있습니다.
+몇 가지의 구문은 {{#if A}}와 같은 Block Syntax(블록 구문)입니다. 이 구문은 `{{#NAME A}}`로 시작하여 `{{/NAME}}`로 끝납니다. 블록 구문은 중첩될 수 있으며, `#`으로 시작합니다. 또한 `{{/NAME}}` 대신 `{{/}}`로 닫을 수도 있습니다. 블록 구문의 내용의 들여쓰기와 공백은 다듬어지지만, `{{#if_pure A}}`와 같은 일부 구문은 들여쓰기와 공백을 유지합니다.
 
-## Data Syntaxes
+## Data Syntaxes (데이터 구문)
 
 ### `{{user}}`
 
-This will be replaced with the personas's name.
+페르소나 또는 사용자 이름으로 대체됩니다.
 
 ### `{{char}}`
 
 > Alias: `{{bot}}`
 
-This will be replaced with the character's name.
-If you are chatting in a group chat, if the speaker is user, this will be replaced with group chat name. if the speaker is character, this will be replaced with the speaker's name.
+캐릭터의 이름으로 대체됩니다.
+만약 그룹 채팅에서 대화 중이라면, 화자가 사용자라면 그룹 채팅 이름으로 대체되고, 화자가 캐릭터라면 화자의 이름으로 대체됩니다.
 
 ### `{{description}}`
 
 > Alias: `{{char_desc}}`
 
-This will be replaced with the character's description.
+캐릭터의 설명으로 대체됩니다.
 
 ### `{{example_dialogue}}`
 
 > Alias: `{{example_message}}`
 
-This will be replaced with an array of example dialogue of the character.
+캐릭터의 예제 대화 배열로 대체됩니다.
 
 ### `{{persona}}`
 
 > Alias: `{{user_persona}}`
 
-This will be replaced with the persona's description.
+페르소나의 설명으로 대체됩니다.
 
 ### `{{lorebook}}`
 
 > Alias: `{{world_info}}`
 
-This will be replaced with array of lorebook entries.
+로어북 배열로 대체됩니다.
 
 ### `{{authornote}}`
 
 > Alias: `{{author_note}}`
 
-This will be replaced with [Author's Note](/characterconfig/basic.md) included in the current chat prompt. This is also known as memory or UJB.
+프롬프트에 포함된 [작가의 노트](/characterconfig/basic.md)로 대체됩니다. 이는 메모리 또는 UJB라고도 알려져 있습니다.
 
 ### `{{history}}`
 
 > Alias: `{{messages}}`
 
-This will be replaced with array of messages in current chat.
+현재 채팅의 메시지 배열로 대체됩니다.
 
 ### `{{chat_index}}`
 
-This will be replaced with the index of the message in the chat.
-The chat index starts from 0 except for the first message. The first message has an index of -1.
-If the `{{chat_index}}` is used in non-chat context, it will be replaced with -1.
+채팅의 메시지 인덱스로 대체됩니다.
+채팅 인덱스는 첫 번째 메시지를 제외하고 0부터 시작합니다.
+첫 번째 메시지는 -1의 인덱스를 가집니다. `{{chat_index}}`가 채팅 메시지 밖에서 사용되는 경우, -1로 대체됩니다.
 
 ### `{{model}}`
 
-This will be replaced with the current model id of the client.
+클라이언트의 현재 모델 ID로 대체됩니다.
 
 ### `{{axmodel}}`
 
-This will be replaced with the current auxiliary model id of the client.
+크라이언트의 현재 보조 모델 ID로 대체됩니다.
 
 ### `{{role}}`
 
-This will be replaced with the current role of the message sender.
-If the `{{role}}` is used in non-chat context, it will be replaced with `role` string.
+채팅 메시지 발신자의 현재 역할로 대체됩니다.
+만약 `{{role}}`이 채팅 메시지 밖에서 사용된다면, `role` 문자열로 대체됩니다.
 
 ### `{{maxcontext}}`
 
-This will be replaced with the maximum context length setting of the client.
+크라이언트의 최대 컨텍스트 크기로 대체됩니다.
 
 ### `{{lastmessage}}`
 
-This will be replaced with the last message in the chat log.
+채팅 로그의 마지막 메시지로 대체됩니다.
 
 ### `{{lastmessageid}}`
 
 > Alias: `{{lastmessageindex}}`
 
-This will be replaced with the index of the last message in the chat log.
+채팅 로그의 마지막 메시지의 인덱스로 대체됩니다.
 
 ### `{{previous_char_chat}}`
 
 > Alias: `{{lastcharmessage}}`
 
-This will be replaced with the last message of the current character in the chat log.
+채팅 로그의 현재 캐릭터의 마지막 메시지로 대체됩니다.
 
 ### `{{previous_user_chat}}`
 
 > Alias: `{{lastusermessage}}`
 
-This will be replaced with the last message of the user in the chat log.
+채팅 로그의 사용자의 마지막 메시지로 대체됩니다.
 
 ### `{{previous_chat_log::A}}`
 
-This will be replaced with the chat message with the index of `A` in the chat log. If the message does not exist, it will be replaced with `Out of range`
+`A`의 인덱스를 가진 채팅 로그의 메시지로 대체됩니다. 만약 메시지가 존재하지 않는다면, `Out of range`로 대체됩니다.
 
 ### `{{first_msg_index}}`
 
-This will be replaced with the index of the first message in the chat log.
+채팅 로그의 첫 번째 메시지의 인덱스로 대체됩니다.
 
 ### `{{screen_width}}`
 
-This will be replaced with the width of the screen in pixels.
+화면의 너비를 픽셀 단위로 대체됩니다.
 
 ### `{{screen_height}}`
 
-This will be replaced with the height of the screen in pixels.
+화면의 높이를 픽셀 단위로 대체됩니다.
 
 ### `{{user_history}}`
 
-This will be replaced with the array of messages of the user in the chat log.
+채팅 로그의 사용자의 메시지 배열로 대체됩니다.
 
 ### `{{char_history}}`
 
-This will be replaced with the array of messages of the character in the chat log.
+채팅 로그의 캐릭터의 메시지 배열로 대체됩니다.
 
-## Time Syntaxes
+## Time Syntaxes (시간 구문)
 
 ### `{{time}}`
 
-This will be replaced with the current time in the client's timezone. The returned value is not zero-padded, so it may look like `9:5:3`.
+클라이언트의 현재 시간으로 대체됩니다. 반환되는 시간 형식은 브라우저 또는 OS 설정에 따라 결정됩니다. 숫자의 자리수를 고정하지 않으므로 `9:5:3`과 같이 보일 수 있습니다.
 
 ### `{{time::A}}`
 
-This will be replaced with the current time, in format of `A` in client's timezone.
+`A`의 형식으로 클라이언트의 현재 시간으로 대체됩니다. 반환되는 시간은 클라이언트의 시간대에 따라 달라집니다.
 
-The format `A` can include the following:
-- `YYYY` for the year.
-- `YY` for the year in two digits.
-- `MM` for the month.
-- `DD` for the day.
-- `DDDD` for the day count of the year.
-- `HH` for the hour, in 24-hour format.
-- `hh` for the hour, in 12-hour format.
-- `mm` for the minute.
-- `ss` for the second.
-- `A` for the AM/PM indicator.
-- `X` for the unix timestamp.
-- `x` for the unix timestamp in milliseconds.
 
-for example, `{{time::YYYY-MM-DD HH:mm:ss}}` will be replaced with the current time in the format `2024-12-31 23:59:59` if the current time is `2024-12-31 23:59:59`.
+393
+`A`는 다음을 나타낼 수 있습니다.
+- `YYYY`는 연도를 나타냅니다.
+- `YY`는 두 자리 숫자로 된 연도를 나타냅니다.
+- `MM`은 월을 나타냅니다.
+- `DD`는 일을 나타냅니다.
+- `DDDD`는 연중 일수를 나타냅니다.
+- `HH`는 24시간 형식의 시를 나타냅니다.
+- `hh`는 12시간 형식의 시를 나타냅니다.
+- `mm`은 분을 나타냅니다.
+- `ss`는 초를 나타냅니다.
+- `A`는 오전/오후를 나타냅니다.
+- `X`는 유닉스 타임스탬프를 나타냅니다.
+- `x`는 밀리초 단위의 유닉스 타임스탬프를 나타냅니다.
+
+예를 들어, `{{time::YYYY-MM-DD HH:mm:ss}}`는 현재 시간이 `2024-12-31 23:59:59`인 경우 `2024-12-31 23:59:59`로 대체됩니다.
 
 ### `{{time::A::B}}`
 
-Same as `{{time::A}}`, but the time is based on timestamp `B` in milliseconds instead of the current time.
+`{{time::A}}`와 동일하지만, 시간은 현재 시간이 아닌 밀리초 단위의 타임스탬프 `B`를 기반으로 합니다.
+
+**주의: 현재 오류로 정상적으로 작동하지 않습니다.**
 
 ### `{{unixtime}}`
 
-This will be replaced with the current Unix timestamp in seconds.
+현재 유닉스 타임스탬프로 대체됩니다.
 
 ### `{{date}}`
 
 > Alias: `{{datetimeformat}}`
 
-This will be replaced with the current date, in the format `YYYY-M-D` in client's timezone.
+`YYYY-M-D` 형식으로 현재 날짜로 대체됩니다. 클라이언트의 시간대에 따라 결정됩니다.
 
 ### `{{isotime}}`
 
-This will be replaced with the current time, in the format `HH:MM:SS` in the UTC timezone.
+`HH:MM:SS` 형식으로 현재 시간으로 대체됩니다. 클라이언트의 시간대에 따라 결정됩니다.
 
 ### `{{isodate}}`
 
-This will be replaced with the current date, in the format `YYYY-MM-DD` in the UTC timezone.
+`YYYY-MM-DD` 형식으로 현재 날짜로 대체됩니다. 클라이언트의 시간대에 따라 결정됩니다.
 
 ### `{{message_time}}`
 
-This will be replaced with the time when the message was sent.
-The returned time format would determined by the browser or OS settings.
+메시지가 전송된 시간으로 대체됩니다.
+반환되는 시간 형식은 브라우저 또는 OS 설정에 따라 결정됩니다.
 
-If the `{{message_time}}` is used in non-chat context or the first message, it will be replaced [Cannot get time] string.
-If the message was sent before `{{message_time}}` syntax was introduced, it will be replaced with [Cannot get time, message was sent in older version] string.
+만약 `{{message_time}}`이 채팅 메시지 외부에서 사용되거나 첫 번째 메시지에서 사용된다면, [Cannot get time] 문자열로 대체됩니다.
+만약 메시지가 `{{message_time}}` 구문이 도입되기 전에 전송되었다면, [Cannot get time, message was sent in older version] 문자열로 대체됩니다.
 
 ### `{{message_date}}`
 
-This will be replaced with the date when the message was sent.
-The returned date format would determined by the browser or OS settings.
+메시지가 전송된 날짜로 대체됩니다.
+반환되는 날짜 형식은 브라우저 또는 OS 설정에 따라 결정됩니다. OS settings.
 
-If the `{{message_date}}` is used in non-chat context or the first message, it will be replaced [Cannot get time] string.
-If the message was sent before `{{message_date}}` syntax was introduced, it will be replaced with [Cannot get time, message was sent in older version] string.
+만약 `{{message_date}}`이 채팅 메시지 외부에서 사용되거나 첫 번째 메시지에서 사용된다면, [Cannot get time] 문자열로 대체됩니다.
+만약 메시지가 `{{message_date}}` 구문이 도입되기 전에 전송되었다면, [Cannot get time, message was sent in older version] 문자열로 대체됩니다.
 
 ### `{{message_idle_duration}}`
 
-This will be replaced with the time when the user's previous message was sent subtracted by the time when the user's second previous message was sent.
-The returned time format would be `HH:MM:SS` format.
+가장 최근 보내진 사용자의 메시지 2개의 시간 차이로 대체됩니다.
+반환되는 시간 형식은 `HH:MM:SS` 입니다.
 
-If the `{{message_idle_duration}}` is used in non-chat context or the first message, it will be replaced [Cannot get time] string.
-If the message was sent before `{{message_idle_duration}}` syntax was introduced, it will be replaced with [Cannot get time, message was sent in older version] string.
-If there are no previous messages, it will be replaced with [No user message found] string.
+만약 `{{message_idle_duration}}`이 채팅 메시지 외부에서 사용되거나 첫 번째 메시지에서 사용된다면, [Cannot get time] 문자열로 대체됩니다.
+만약 메시지가 `{{message_idle_duration}}` 구문이 도입되기 전에 전송되었다면, [Cannot get time, message was sent in older version] 문자열로 대체됩니다.
+만약 이전 메시지가 없다면, [No user message found] 문자열로 대체됩니다.
 
 ### `{{idle_duration}}`
 
-This will be replaced with the time when the user's previous message was sent subtracted by the current time.
-The returned time format would be `HH:MM:SS` format.
+사용자가 이전 메시지를 보낸 시간에서 현재 시간을 뺀 값으로 대체됩니다.
+반환되는 시간 형식은 `HH:MM:SS` 형식입니다.
 
 ### `{{message_unixtime_array}}`
 
-This will be replaced with the array of unix timestamps of the chat log.
+채팅 로그의 메시지들의 유닉스 타임스탬프 배열로 대체됩니다.
 
 ## Emotion/Asset Syntaxes
 
 ### `{{asset::A}}`
 
-This will be replaced with the element with the source of the additional asset path data named `A` of the current character. type of the element would be determined by the asset type automatically.
+현재 캐릭터의 `A`라는 이름의 추가 에셋을 경로 데이터를 가진 요소로 대체됩니다. 요소의 유형은 자산 유형에 따라 자동으로 결정됩니다.
 
 ### `{{emotion::A}}`
 
-This will be replaced with the image element with the source of the emotion image path data named `A` of the current character.
+현재 캐릭터의 `A`라는 이름의 감정 이미지 경로 데이터를 가진 요소로 대체됩니다. 요소의 유형은 이미지 요소입니다.
 
 ### `{{audio::A}}`
 
-This will be replaced with the audio element with the source of the additional asset path data named `A` of the current character.
+현재 캐릭터의 `A`라는 이름의 추가 에셋 경로 데이터를 가진 오디오 요소로 대체됩니다.
 
 ### `{{bg::A}}`
 
-This will be replaced with the background image element with the source of the additional asset path data named `A` of the current character.
+현재 캐릭터의 `A`라는 이름의 추가 에셋 경로 데이터를 가진 배경 이미지 요소로 대체됩니다.
 
 ### `{{video::A}}`
 
-This will be replaced with the video element with the source of the additional asset path data named `A` of the current character.
+현재 캐릭터의 `A`라는 이름의 추가 에셋 경로 데이터를 가진 비디오 요소로 대체됩니다.
 
 ### `{{video-img::A}}`
 
-This will be replaced with the video element with the source of the additional asset path data named `A` of the current character. unlike `{{video::A}}`, the element would be displayed like an image element.
+현재 캐릭터의 `A`라는 이름의 추가 에셋 경로 데이터를 가진 비디오 요소로 대체됩니다. `{{video::A}}`와 달리, 요소는 이미지처럼 표시됩니다.
 
 ### `{{raw::A}}`
 
-This will be replaced with additional asset path data named `A` of the current character.
+현재 캐릭터의 `A`라는 이름의 추가 에셋 경로 데이터로 대체됩니다.
 
 ### `{{image::A}}`
 
-This will be replaced with the image element with the source of the additional asset path data named `A` of the current character.
+현재 캐릭터의 `A`라는 이름의 추가 에셋 경로 데이터를 가진 이미지 요소로 대체됩니다.
 
 ### `{{img::A}}`
 
-This will be replaced with the unstyled image element with the source of the additional asset path data named `A` of the current character.
+현재 캐릭터의 `A`라는 이름의 추가 에셋 경로 데이터를 가진 스타일이 적용되지 않은 이미지 요소로 대체됩니다.
 
 ### `{{assetlist}}`
 
-This will be replaced with the array of names of additional assets of the current character.
+현재 캐릭터의 추가 에셋 이름 배열로 대체됩니다.
 
 ### `{{chardisplayasset}}`
 
-This will be replaced with a JSON array of asset names inserted into the prompt for character display assets. Unlike `{{assetlist}}`, this reflects the New Image Handling setting and excludes assets disabled for prompt insertion.
+현재 캐릭터의 프롬프트에 삽입되는 추가 에셋 이름 배열로 대체됩니다. 새로운 이미지 처리 설정이 켜져 있어야 합니다. `{{assetlist}}`와 달리, 프롬프트 삽입에 비활성화된 에셋은 제외됩니다.
 
 ### `{{moduleassetlist::A}}`
 
 > Alias: `{{module_assetlist::A}}`
 
-This will be replaced with an array of asset names from module namespace `A`. If the module is not found, this will be replaced with an empty string.
+`A`라는 이름의 모듈 네임스페이스에서 추가 에셋 이름 배열로 대체됩니다. 모듈이 발견되지 않으면, 빈 문자열로 대체됩니다.
 
 ### `{{emotionlist}}`
 
-This will be replaced with the array of names of emotion images of the current character.
+현재 캐릭터의 감정 이미지 이름 배열로 대체됩니다.
 
 ### `{{source::A}}`
 
-This will be replaced with the path of the icon. if A is `char`, it will be replaced with the path of the character's icon. if A is `user`, it will be replaced with the path of the user's icon.
+아이콘의 경로 데이터로 대체됩니다. 만약 A가 `char`라면, 캐릭터의 아이콘 경로 데이터로 대체됩니다. 만약 A가 `user`라면, 사용자의 아이콘 경로 데이터로 대체됩니다.
 
 ### `{{inlay::A}}`
 
-This displays unstyled inlay asset `A`. The asset is not inserted into the model request.
+`A`라는 이름의 인레이 에셋을 스타일이 적용되지 않은 요소로 표시합니다. 에셋은 모델 요청에 삽입되지 않습니다.
 
 ### `{{inlayed::A}}`
 
-This displays styled inlay asset `A`. The asset is not inserted into the model request.
+`A`라는 이름의 인레이 에셋을 스타일이 적용된 요소로 표시합니다. 에셋은 모델 요청에 삽입되지 않습니다.
 
 ### `{{inlayeddata::A}}`
 
-This displays styled inlay asset `A`. The asset is inserted into the model request.
+`A`라는 이름의 인레이 에셋을 스타일이 적용된 요소로 표시합니다. 에셋은 모델 요청에 삽입됩니다.
 
-## Math Syntaxes
+## Math Syntaxes (수학 구문)
 
 ### `{{? A}}`
 
 >Alias: `{{calc::A}}`
 
-This will be replaced with the result of the calculation of the provided expression `A`. for example, `{{? 5+3}}` will be replaced with `8`. You can nest other syntaxes in the expression.
+이 부분은 제공된 표현식 `A`의 계산 결과로 대체됩니다. 예를 들어, `{{? 5+3}}`은 `8`로 대체됩니다. 표현식 내에 다른 구문을 중첩할 수도 있습니다.
 
-These are the supported operators and functions:
-- `A+B` for addition of `A` and `B`.
-- `A-B` for subtraction of `B` from `A`.
-- `A*B` for multiplication of `A` and `B`.
-- `A/B` for division of `A` by `B`.
-- `A%B` for remainder of the division of `A` by `B`.
-- `A^B` for `A` raised to the power of `B`.
-- `A||B` for `A` or `B`.
-- `A&&B` for `A` and `B`.
-- `!A` for not `A`.
-- `A==B` for `A` is equal to `B`.
-- `A!=B` for `A` is not equal to `B`.
-- `A>B` for `A` is greater than `B`.
-- `A>=B` for `A` is greater than or equal to `B`.
-- `A<B` for `A` is less than `B`.
-- `A<=B` for `A` is less than or equal to `B`.
-- `$<name>` for getting the value of the chat variable named `<name>`. `<name>` should be named with only alphanumeric characters and underscore.
+지원되는 연산자 및 함수는 다음과 같습니다.
+- `A+B`: `A`와 `B`의 덧셈
+- `A-B`: `A`에서 `B`의 뺄셈
+- `A*B`: `A`와 `B`의 곱셈
+- `A/B`: `A`를 `B`로 나눕니다.
+- `A%B`: `A`를 `B`로 나눈 나머지
+- `A^B`: `A`를 `B` 제곱합니다.
+- `A||B`: `A` 또는 `B`
+- `A&&B`: `A`와 `B` 모두
+- `!A`: `A`가 아님
+- `A==B`는 `A`가 `B`와 같다는 의미입니다.
+- `A!=B`는 `A`가 `B`와 같지 않다는 의미입니다.
+- `A>B`는 `A`가 `B`보다 크다는 의미입니다.
+- `A>=B`는 `A`가 `B`보다 크거나 같다는 의미입니다.
+- `A<B`는 `A`가 `B`보다 작다는 의미입니다.
+- `A<=B`는 `A`가 `B`보다 작거나 같다는 의미입니다.
+- `$<name>`은 `<name>`이라는 채팅 변수의 값을 가져오는 데 사용됩니다. `<name>`은 영숫자와 밑줄(_)로만 구성되어야 합니다.
 
-Some of the syntaxes has aliases:
-- `|` for `||`
-- `&` for `&&`
-- `=` for `==`
-- `≤` for `<=`
-- `≥` for `>=`
+일부 구문에는 별칭이 있습니다.
+- `|` 는 `||` 를 대체합니다.
+- `&` 는 `&&` 를 대체합니다.
+- `=` 는 `==` 를 대체합니다.
+- `≤` 는 `<=` 를 대체합니다.
+- `≥` 는 `>=` 를 대체합니다.
 
-The boolean values are represented as `1` for `true` and `0` for `false`. Note that `{{? A}}` syntax is only for numeric and boolean values. for string values, use other syntaxes like `{{equal::A::B}}`.
+논리 값(Boolean)은 참일 경우 `1`, 거짓일 경우 `0`으로 표현됩니다. `{{? A}}` 구문은 숫자 및 논리 값에만 사용 가능하며, 문자열 값의 경우 `{{equal::A::B}}`와 같은 다른 구문을 사용하십시오.
 
 ### `{{equal::A::B}}`
 
-This will be replaced with `1` if `A` is equal to `B`, otherwise it will be replaced with `0`. unlike `{{? A}}`, this syntax works for any type of values.
+`A`가 `B`와 같으면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다. `{{? A}}`와 달리, 이 구문은 모든 유형의 값에 대해 작동합니다.
 
 ### `{{not_equal::A::B}}`
 
 > Alias: {{notequal::A::B}}
 
-This will be replaced with `1` if `A` is not equal to `B`, otherwise it will be replaced with `0`. unlike `{{? A}}`, this syntax works for any type of values.
+`A`가 `B`와 같지 않으면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다. `{{? A}}`와 달리, 이 구문은 모든 유형의 값에 대해 작동합니다.
 
 ### `{{remaind::A::B}}`
 
-This will be replaced with the remainder of the division of `A` by `B`.
+`A`를 `B`로 나눈 나머지로 대체됩니다.
 
 ### `{{greater::A::B}}`
 
-This will be replaced with `1` if `A` is greater than `B`, otherwise it will be replaced with `0`.
+`A`가 `B`보다 크면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{greater_equal::A::B}}`
 
 > Alias: {{greaterequal::A::B}}
 
-This will be replaced with `1` if `A` is greater than or equal to `B`, otherwise it will be replaced with `0`.
+`A`가 `B`보다 크거나 같으면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{less::A::B}}`
 
-This will be replaced with `1` if `A` is less than `B`, otherwise it will be replaced with `0`.
+`A`가 `B`보다 작으면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{less_equal::A::B}}`
 
 > Alias: {{lessequal::A::B}}
 
-This will be replaced with `1` if `A` is less than or equal to `B`, otherwise it will be replaced with `0`.
+`A`가 `B`보다 작거나 같으면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{and::A::B}}`
 
-This will be replaced with `1` if `A` and `B` are both `1`, otherwise it will be replaced with `0`.
+`A`와 `B` 모두가 `1`이면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{or::A::B}}`
 
-This will be replaced with `1` if `A` or `B` is `1`, otherwise it will be replaced with `0`.
+`A`나 `B` 중 하나라도 `1`이면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{pow::A::B}}`
 
-This will be replaced with `A` raised to the power of `B`.
+`A`를 `B` 제곱한 값으로 대체됩니다.
 
 ### `{{not::A}}`
 
-This will be replaced with `1` if `A` is `0`, otherwise it will be replaced with `0`.
+`A`가 `0`이면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{floor::A}}`
 
-This will be replaced with the largest integer less than or equal to `A`.
+`A`보다 작거나 같은 가장 큰 정수로 대체됩니다.
 
 ### `{{ceil::A}}`
 
-This will be replaced with the smallest integer greater than or equal to `A`.
+`A`보다 크거나 같은 가장 작은 정수로 대체됩니다.
 
 ### `{{abs::A}}`
 
-This will be replaced with the absolute value of `A`.
+`A`의 절대값으로 대체됩니다.
 
 ### `{{round::A}}`
 
-This will be replaced with `A` rounded to the nearest integer.
+`A`를 가장 가까운 정수로 반올림한 값으로 대체됩니다.
 
 ### `{{min::A::B::C...}}`
 
-This will be replaced with the smallest value among `A`, `B`, `C`, and so on.
-If only one parameter is provided, `A` will be treated as the array of values.
+`A`, `B`, `C` 등의 값 중에서 가장 작은 값으로 대체됩니다.
+만약 하나의 매개변수만 제공된다면, `A`는 값들의 배열로 처리됩니다.
 
 ### `{{max::A::B::C...}}`
 
-This will be replaced with the largest value among `A`, `B`, `C`, and so on.
-If only one parameter is provided, `A` will be treated as the array of values.
+`A`, `B`, `C` 등의 값 중에서 가장 큰 값으로 대체됩니다.
+만약 하나의 매개변수만 제공된다면, `A`는 값들의 배열로 처리됩니다.
 
 ### `{{sum::A::B::C...}}`
 
-This will be replaced with the sum of `A`, `B`, `C`, and so on.
-If only one parameter is provided, `A` will be treated as the array of values.
+`A`, `B`, `C` 등의 값의 합으로 대체됩니다.
+만약 하나의 매개변수만 제공된다면, `A`는 값들의 배열로 처리됩니다.
 
 ### `{{average::A::B::C...}}`
 
-This will be replaced with the average of `A`, `B`, `C`, and so on.
-If only one parameter is provided, `A` will be treated as the array of values.
+`A`, `B`, `C` 등의 값의 평균으로 대체됩니다.
+만약 하나의 매개변수만 제공된다면, `A`는 값들의 배열로 처리됩니다.
 
 ### `{{fix_number::A::B}}`
 
-This will be replaced with `A` with the number of decimal places fixed to `B`.
+`A`를 소수점 `B`자리로 고정한 값으로 대체됩니다.
 
 ### `{{randint::A::B}}`
 
-This will be replaced with a random integer between `A` and `B`, inclusive. If `A` or `B` is not a valid number, this will be replaced with `NaN`.
+`A`와 `B` 사이의 무작위 정수로 대체됩니다. `A`와 `B`는 모두 포함됩니다. `A` 또는 `B`가 유효한 숫자가 아닌 경우, `NaN`으로 대체됩니다.
 
 ### `{{dice::A}}`
 
-This will roll dice using standard dice notation. For example, `{{dice::2d6}}` rolls two six-sided dice and returns the sum.
+표준 주사위 표기법을 사용하여 주사위를 굴리는 데 사용됩니다. 예를 들어, `{{dice::2d6}}`는 두 개의 6면체 주사위를 굴려 합계를 반환합니다.
 
 ### `{{fromhex::A}}`
 
-This will be replaced with hexadecimal value `A` converted to a decimal number.
+16 진수 값 `A`를 10 진수로 변환한 값으로 대체됩니다.
 
 ### `{{tohex::A}}`
 
-This will be replaced with decimal value `A` converted to a hexadecimal string.
+10 진수 값 `A`를 16 진수 문자열로 변환한 값으로 대체됩니다.
 
-## String Syntaxes
+## String Syntaxes (문자열 구문)
 
 ### `{{startswith::A::B}}`
 
-This will be replaced with `1` if `A` starts with `B`, otherwise it will be replaced with `0`.
+`A`가 `B`로 시작하면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{endswith::A::B}}`
 
-This will be replaced with `1` if `A` ends with `B`, otherwise it will be replaced with `0`.
+`A`가 `B`로 끝나면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{contains::A::B}}`
 
-This will be replaced with `1` if `A` contains `B`, otherwise it will be replaced with `0`.
+`A`가 `B`를 포함하면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{lower::A}}`
 
-This will be replaced with `A` converted to lowercase.
+`A`를 소문자로 변환한 값으로 대체됩니다.
 
 ### `{{upper::A}}`
 
-This will be replaced with `A` converted to uppercase.
+`A`를 대문자로 변환한 값으로 대체됩니다.
 
 ### `{{capitalize::A}}`
 
-This will be replaced with `A` with the first letter capitalized.
+`A`의 첫 번째 글자를 대문자로 변환한 값으로 대체됩니다.
 
 ### `{{trim::A}}`
 
-This will be replaced with `A` with leading and trailing whitespaces removed.
+`A`의 앞뒤 공백을 제거한 값으로 대체됩니다.
 
 ### `{{unicode_encode::A}}`
 
-This will be replaced with `A` encoded to unicode. the result would be in the format of number
+`A`를 유니코드로 인코딩한 값으로 대체됩니다. 결과는 숫자 형식입니다.
 
 ### `{{unicode_decode::A}}`
 
-This will be replaced with `A` decoded from unicode. the input should be in the format of number
+`A`를 유니코드에서 디코딩한 값으로 대체됩니다. `A`는 숫자 형식이어야 합니다.
 
 ### `{{unicodedecodefromhex::A}}`
 
 > Alias: `{{u::A}}`
 
-This will be replaced with the character represented by hexadecimal Unicode code `A`.
+`A`를 16 진수 유니코드에서 디코딩한 값으로 대체됩니다.
 
 ### `{{unicodeencodefromhex::A}}`
 
 > Alias: `{{ue::A}}`
 
-This works the same as `{{u::A}}`.
+`{{u::A}}`와 동일합니다.
 
 ### `{{xorencrypt::A}}`
 
 > Alias: `{{xor::A}}`, `{{xorencode::A}}`, `{{xore::A}}`
 
-This will encrypt `A` with a simple XOR cipher and encode the result as base64.
+`A`를 간단한 XOR 암호로 암호화하고 결과를 base64로 인코딩한 값으로 대체됩니다.
 
 ### `{{xordecrypt::A}}`
 
 > Alias: `{{xordecode::A}}`, `{{xord::A}}`
 
-This will decrypt a base64-encoded value created by `{{xor::A}}`.
+`{{xor::A}}`에 의해 생성된 base64-encoded 값의 암호를 해독합니다.
 
 ### `{{crypt::A}}`
 
 > Alias: `{{crypto::A}}`, `{{caesar::A}}`, `{{encrypt::A}}`, `{{decrypt::A}}`
 
-This will apply a Caesar cipher to `A`. With no second argument, it uses the default shift value.
+`A`에 시저 암호를 적용합니다. 두 번째 인수가 없으면 기본 시프트 값을 사용합니다.
 
 ### `{{crypt::A::B}}`
 
 > Alias: `{{crypto::A::B}}`, `{{caesar::A::B}}`, `{{encrypt::A::B}}`, `{{decrypt::A::B}}`
 
-This will apply a Caesar cipher to `A` using shift value `B`.
+`A`에 `B` 값을 사용하여 시저 암호를 적용합니다.
 
-Example:
+예시:
 ```
 {{crypt::Hello, World!}}
 {{crypt::聈聥聬聬聯耬耠聗聯聲聬聤耡}}
@@ -508,7 +512,7 @@ Example:
 {{crypt::Khoor/#Zruog$::-3}}
 ```
 
-will be replaced with
+출력:
 ```
 聈聥聬聬聯耬耠聗聯聲聬聤耡
 Hello, World!
@@ -517,244 +521,271 @@ Khoor/#Zruog$
 Hello, World!
 ```
 
-## Conditional Syntaxes
+## Conditional Syntaxes (조건 구문)
 
 ### `{{prefill_supported}}`
 
-This will be replaced with `1` if the model supports prefilling, otherwise it will be replaced with `0`.
+모델이 프리필을 지원하는 경우 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{jbtoggled}}`
 
-This will be replaced with the current state of the jailbreak toggle.
-If jailbreak is enabled, it will be replaced with `1`, otherwise it will be replaced with `0`.
+탈옥 토글의 현재 상태로 대체됩니다.
+탈옥이 활성화되어 있으면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{isfirstmsg}}`
 
-This will be replaced with `1` if the message is the first message in the chat, otherwise it will be replaced with `0`.
+메시지가 채팅의 첫 번째 메시지인 경우 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{all::A::B::C...}}`
 
-This will be replaced with `1` if all of the parameters are `1`, otherwise it will be replaced with `0`.
-If only one parameter is provided, `A` will be treated as the array of values.
+모든 매개변수가 `1`이면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
+만약 하나의 매개변수만 제공된다면, `A`는 값들의 배열로 처리됩니다.
 
 ### `{{any::A::B::C...}}`
 
-This will be replaced with `1` if any of the parameters are `1`, otherwise it will be replaced with `0`.
-If only one parameter is provided, `A` will be treated as the array of values.
+어떤 매개변수라도 `1`이면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
+만약 하나의 매개변수만 제공된다면, `A`는 값들의 배열로 처리됩니다.
 
 ### `{{module_enabled::A}}`
 
-This will be replaced with `1` if the module with namespace `A` is enabled, otherwise it will be replaced with `0`.
+`A`라는 이름의 모듈 네임스페이스가 활성화된 경우 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다.
 
 ### `{{iserror::A}}`
 
-This will be replaced with `1` if `A` starts with `error:`, otherwise it will be replaced with `0`. The check is case-insensitive.
+`A`가 `error:`로 시작하면 `1`로 대체되고, 그렇지 않으면 `0`으로 대체됩니다. 검사는 대소문자를 구분하지 않습니다.
 
-## Variable Syntaxes
+## Variable Syntaxes (변수 구문)
 
 ### `{{getvar::A}}`
 
-This will be replaced with the value of the chat variable `A`. If the chat variable `A` is not defined, it will be replaced with `null`.
+채팅 변수 `A`의 값으로 대체됩니다. 만약 채팅 변수 `A`가 정의되지 않은 경우, `null`로 대체됩니다.
 
 ### `{{setvar::A::B}}`
 
-This will set the chat variable `A` to `B` and be replaced with an empty string. `{{setvar::A::B}}` only works when it is in the chat context and it is not the first message.
+채팅 변수 `A`를 `B`로 설정하고 빈 문자열로 대체됩니다. `{{setvar::A::B}}`는 채팅 컨텍스트에 있고 첫 번째 메시지가 아닌 경우에만 작동합니다.
 
-If its possible, it is recommended to use trigger script instead of this syntax.
+가능하다면, 이 구문 대신 트리거 스크립트를 사용하는 것이 좋습니다.
 
 ### `{{addvar::A::B}}`
 
-This will increment the chat variable `A` by `B` and be replaced with an empty string. for example, if variable `A` is `5` and `{{addvar::A::3}}` is used, the variable `A` will be `8`. `{{addvar::A::B}}` only works when it is in the chat context and it is not the first message.
+채팅 변수 `A`에 `B`를 더하고 빈 문자열로 대체됩니다. 예를 들어, 변수 `A`가 `5`이고 `{{addvar::A::3}}`이 사용된다면, 변수 `A`는 `8`이 됩니다.
+`{{addvar::A::B}}`는 채팅 컨텍스트에 있고 첫 번째 메시지가 아닌 경우에만 작동합니다.
 
 ### `{{settempvar::A::B}}`
 
-This will set the temporary variable `A` to `B` and be replaced with an empty string. `{{settempvar::A::B}}` only works when it is in the chat context and it is not the first message.
+임시 변수 `A`를 `B`로 설정하고 빈 문자열로 대체됩니다. `{{settempvar::A::B}}`는 채팅 컨텍스트에 있고 첫 번째 메시지가 아닌 경우에만 작동합니다.
 
-Temporary variables are only available in the current context and are not saved when the chat is closed, however, it is performance optimized.
+임시 변수는 현재 컨텍스트에서만 사용 가능하며, 채팅이 종료될 때 저장되지 않습니다. 그러나 성능 최적화가 되어 있습니다.
 
 ### `{{gettempvar::A}}`
 
-This will be replaced with the value of the temporary variable `A`. If the temporary variable `A` is not defined, it will be replaced with `null`.
+임시 변수 `A`의 값으로 대체됩니다. 만약 임시 변수 `A`가 정의되지 않은 경우, `null`로 대체됩니다.
 
 ### `{{getglobalvar::A}}`
 
-This will be replaced with the value of the global variable `A`. If the global variable `A` is not defined, it will be replaced with `null`.
+전역 변수 `A`의 값으로 대체됩니다. 만약 전역 변수 `A`가 정의되지 않은 경우, `null`로 대체됩니다.
 
-## Array Syntaxes
+## Array Syntaxes (배열 구문)
 
 ### `{{array::A::B::C...}}`
 
-This will be replaced with an array of `B`, `C`, and so on. This can be used to create an array from multiple parameters.
+`B`, `C` 등의 요소를 가진 배열로 대체됩니다. 이 기능을 사용하여 여러 매개변수로부터 배열을 생성할 수 있습니다.
 
-Currently array uses `§` as separator, but this might change in the future. so it is recommended to use this syntax instead of using `§` directly.
+*호환성을 위해 JSON 배열이 아닐 경우 문자열이 `§`로 분할될 수 있지만, `§`를 직접 사용하는 것은 권장되지 않습니다.*
 
 ### `{{array_length::A}}`
 
 > Alias: {{arraylength::A}}
 
+배열 `A`의 길이로 대체됩니다. 문자열에서 작동하지 않습니다.
 This will be replaced with the length of array `A`. this would not work with strings.
 
 ### `{{array_element::A::B}}`
 
-This will be replaced with the element of array `A` at index `B`.
-index starts from 0. if the index is out of range, it will be replaced with `null`. if index is negative, it will be counted from the end of the array.
+인덱스 `B`에 있는 배열 `A`의 요소로 대체됩니다.
+인덱스는 0부터 시작합니다. 인덱스가 범위를 벗어나면 `null`로 대체됩니다. 인덱스가 음수인 경우, 배열의 끝에서부터 계산됩니다.
 
 ### `{{array_push::A::B}}`
 
-This will be replaced with array `A` with element `B` pushed to the end.
+배열 `A`에 요소 `B`를 끝에 추가한 배열로 대체됩니다.
 
 ### `{{array_pop::A}}`
 
-This will be replaced with array `A` with the last element removed.
+배열 `A`의 마지막 요소가 제거된 배열로 대체됩니다.
 
 ### `{{array_shift::A}}`
 
-This will be replaced with array `A` with the first element removed.
+배열 `A`의 첫 번째 요소가 제거된 배열로 대체됩니다.
 
-### `{{array_splice::A::B::C::D...}}`
+### `{{array_splice::A::B::C::D}}`
 
-This will be replaced with array `A` with `C`, `D`, and so on inserted at index `B`.
+배열 `A`에서 인덱스 `B`부터 `C`개의 요소를 제거하고, 그 자리에 요소 `D`를 삽입한 배열로 대체됩니다.
 
 ### `{{array_assert::A::B::C}}`
 
-This will be replaced with array `A` with element `C` inserted at index `B`.
+배열 `A`에 요소 `C`가 인덱스 `B`에 삽입된 배열로 대체됩니다.
 
 ### `{{split::A::B}}`
 
-This will be replaced with an array of strings that are separated by `B` in `A`.
+문자열 `A`를 구분자 `B`로 분할한 배열로 대체됩니다.
 
 ### `{{join::A::B}}`
 
-This will be replaced with a string that is created by joining the elements of array `A` with `B`.
+배열 `A`의 요소를 구분자 `B`로 연결한 문자열로 대체됩니다.
 
 ### `{{filter::A::B}}`
 
-This will be replaced with array `A` with elements filtered. the filter `B` is the option.
-options are:
-- `nonempty`: remove empty strings.
-- `unique`: remove duplicate elements.
-- `all`: perform both `nonempty` and `unique` filter.
+배열 `A`의 요소를 필터 `B`로 필터링한 배열로 대체됩니다. 필터 `B`는 옵션입니다.
 
-### Dictionary Syntaxes
+옵션:
+- `nonempty`: 빈 요소를 제거합니다.
+- `unique`: 중복된 요소를 제거합니다.
+- `all`: `nonempty`와 `unique` 필터를 모두 적용합니다.
+
+### Dictionary Syntaxes (사전 구문)
 
 ### `{{dict::A=B::C=D...}}`
 
 > Alias: `{{object::A=B::C=D...}}`, `{{o::A=B::C=D...}}`, `{{d::A=B::C=D...}}`
 
-This will be replaced with a dictionary with keys `A`, `C`, and so on and values `B`, `D`, and so on.
+키 `A`, `C`와 값 `B`, `D` 등을 가진 사전으로 대체됩니다.
 
 ### `{{dict_element::A::B}}`
 
 > Alias: `{{object_element::A::B}}`
 
-This will be replaced with the value of the key `B` in dictionary `A`.
+사전 `A`의 키 `B`에 해당하는 값으로 대체됩니다.
 
 ### `{{dict_assert::A::B::C}}`
 
 > Alias: `{{object_assert::A::B::C}}`
 
-This will be replaced with dictionary `A` with key `B` and value `C` inserted.
+사전 `A`에 키 `B`와 값 `C`가 삽입된 사전으로 대체됩니다.
 
-## Utility Syntaxes
+## Utility Syntaxes (유틸리티 구문)
 
 ### `{{slot}}`
 
-It is replaced only in specific contexts such as prompt templates, group templates, translator prompts, summarization prompts, image prompts, and some trigger/lore operations. In normal chat parsing, it is left unchanged.
+프롬프트 템플릿, 그룹 템플릿, 번역 프롬프트, 요약 프롬프트, 이미지 프롬프트, 일부 트리거/로어 작업 같은 특정 상황에서만 대체됩니다. 일반 채팅 파싱에서는 그대로 남습니다.
 
 ### `{{slot::A}}`
 
-Inside a `{{#each C as A}}` block, this is replaced with the current element of array `C`. If the name does not match the loop variable, it is left unchanged.
+`{{#each C as A}}` 블록 안에서 배열 `C`의 현재 요소로 대체됩니다. 이름이 반복 변수와 일치하지 않으면 그대로 남습니다.
 
 ### `{{position::A}}`
 
-If it is used in prompt template, it will be replaced to the lorebooks that uses position `pt_<A>` like `pt_personality`. if the corresponding lorebook does not exist, it will be replaced with an empty string. otherwise, it will not be replaced.
+프롬프트 템플릿에서 사용하면 `pt_personality`처럼 `pt_<A>` 위치를 사용하는 로어북으로 대체됩니다. 해당 로어북이 없으면 빈 문자열로 대체됩니다. 그 외 상황에서는 대체되지 않습니다.
 
 ### `{{random::A::B...}}`
 
 > Alias: `{{random:A,B...}}`
 
-This will be replaced with a random value from the provided parameters. for example, `{{random::A::B::C}}` will be replaced with either `A`, `B`, or `C`.
-If no parameters are provided, it will be replaced with random number between 0 and 1.
+전달된 매개변수 중 임의의 값으로 대체됩니다. 예를 들어 `{{random::A::B::C}}`는 `A`, `B`, `C` 중 하나로 대체됩니다.
+매개변수가 없으면 0과 1 사이의 난수로 대체됩니다.
 
 ### `{{pick::A::B...}}`
 
 > Alias: `{{pick:A,B...}}`
 
-This would work same as `{{random::A::B...}}`, except the seed would be the same for the same message which would make the result consistent. This also doesn't work with no parameters.
+`{{random::A::B...}}`와 비슷하게 동작하지만, 같은 메시지에서는 같은 시드를 사용하므로 결과가 동일합니다. 매개변수가 없으면 동작하지 않습니다.
 
 ### `{{roll::A}}`
 
 > Alias: `{{roll:A}}`
 
-This will be replaced with a random number between 1 and `A`. if `A` starts with `d`, it will be replaced with a random number between 1 and `A` without the `d`.
+1부터 `A` 사이의 임의의 숫자로 대체됩니다. `A`가 `d`로 시작하면 `d`를 제외한 값까지의 주사위 굴림처럼 처리됩니다.
 
 ### `{{rollp::A}}`
 
 > Alias: `{{rollp:A}}`, `{{rollpick::A}}`
 
-This would work same as `{{roll::A}}`, except the seed would be the same for the same message which would make the result consistent.
+`{{roll::A}}`와 비슷하게 동작하지만, 같은 메시지에서는 같은 시드를 사용하므로 결과가 동일합니다.
 
 ### `{{spread::A}}`
 
-This will be replaced with a a string created by joining the elements of array `A` with `::` (two colons). This can be used to make multi-parameter syntaxes from arrays. For example, `{{random::{{spread::{{array::chicken::pizza::hamburger}}}}}}` will act same as `{{random::chicken::pizza::hamburger}}`.
+배열 `A`의 요소를 `::`로 이어 붙인 문자열로 대체됩니다. 배열을 여러 매개변수를 받는 구문에 전달할 때 사용할 수 있습니다. 예를 들어 `{{random::{{spread::{{array::chicken::pizza::hamburger}}}}}}`는 `{{random::chicken::pizza::hamburger}}`와 같이 동작합니다.
 
 ### `{{replace::A::B::C}}`
 
-This will be replaced with `A` with all occurrences of `B` replaced with `C`.
+`A` 안의 모든 `B`를 `C`로 바꾼 값으로 대체됩니다.
 
 ### `{{range::A}}`
 
-This will be replaced with an array of numbers from 0 to `A` - 1.
+0부터 `A - 1`까지의 숫자 배열로 대체됩니다.
 
 ### `{{length::A}}`
 
-This will be replaced with the length of `A`. this would not work with arrays.
+`A`의 길이로 대체됩니다. 배열에는 동작하지 않습니다.
 
 ### `{{tonumber::A}}`
 
-This would trim all non-numeric characters except for `.`. This doesn't guarantee that the result is a valid number.
+`.`을 제외한 숫자가 아닌 문자를 제거합니다. 결과가 항상 유효한 숫자라는 보장은 없습니다.
 
 ### `{{return::A}}`
 
-If this syntax is provided, the message will be replaced with `A` and the rest of the message will be ignored.
+이 구문이 있으면 메시지는 `A`로 대체되고, 뒤의 나머지 내용은 무시됩니다.
 
 ### `{{button::A::B}}`
 
-This will add a button HTML element with label `A`. When clicked, it runs trigger `B`. See the [Trigger Script (Lua Mode)](/srp/lua.md) documentation for trigger behavior.
+라벨이 `A`인 버튼 HTML 요소를 추가합니다. 클릭하면 트리거 `B`를 실행합니다. 트리거 동작은 [Trigger Script (Lua Mode)](/srp/lua.md) 문서를 참고하세요.
 
 ### `{{risu}}`
 
-This will add the Risu icon at the default size.
+기본 크기의 Risu 아이콘을 추가합니다.
 
 ### `{{risu::A}}`
 
-This will add the Risu icon with width and height set to `A` pixels.
+가로와 세로가 `A`픽셀인 Risu 아이콘을 추가합니다.
 
 ### `{{call::A::B::C...}}`
 
-This calls the function block named `A` with arguments `B`, `C`, and so on, and is replaced with the function result.
+`A`라는 이름의 함수 블록을 `B`, `C` 등의 인수와 함께 호출하고, 함수 결과로 대체됩니다.
 
 ### `{{hash::A}}`
 
 This will be replaced with a deterministic 7-digit number generated from `A`. The same input always returns the same output.
+`A`에서 생성한 7자리 숫자 해시로 대체됩니다. 같은 입력은 항상 같은 출력을 반환합니다.
 
 ### `{{metadata::A}}`
 
-This will be replaced with metadata value `A`. Supported keys include `mobile`, `local`, `node`, `version`, `majorversion`, `majorver`, `major`, `language`, `locale`, `lang`, `browserlanguage`, `browserlocale`, `browserlang`, `modelshortname`, `modelname`, `modelinternalid`, `modelformat`, `modelprovider`, `modeltokenizer`, `risutype`, and `maxcontext`.
+메타데이터 값 `A`로 대체됩니다.
 
-If `A` is not a valid metadata key, this will be replaced with an error string.
+<details>
+<summary>지원되는 metadata 키</summary>
+
+| 키 | 설명 |
+| --- | --- |
+| `mobile` | 모바일 환경이면 `1`, 아니면 `0`을 반환합니다. |
+| `local` | 로컬 앱 환경이면 `1`, 아니면 `0`을 반환합니다. |
+| `node` | Node 서버 환경이면 `1`, 아니면 `0`을 반환합니다. |
+| `version` | 앱 버전을 반환합니다. |
+| `majorversion`, `majorver`, `major` | 앱 버전의 첫 번째 숫자만 반환합니다. |
+| `language`, `locale`, `lang` | 앱에서 설정된 언어 값을 반환합니다. |
+| `browserlanguage`, `browserlocale`, `browserlang` | 브라우저 언어 값을 반환합니다. |
+| `modelshortname` | 현재 모델의 짧은 이름을 반환합니다. |
+| `modelname` | 현재 모델 이름을 반환합니다. |
+| `modelinternalid` | 현재 모델의 내부 ID를 반환합니다. |
+| `modelformat` | 현재 모델의 format 값을 반환합니다. |
+| `modelprovider` | 현재 모델의 provider 값을 반환합니다. |
+| `modeltokenizer` | 현재 모델의 tokenizer 값을 반환합니다. |
+| `risutype` | 실행 환경을 `local`, `node`, `web` 중 하나로 반환합니다. |
+| `maxcontext` | 현재 최대 컨텍스트 길이를 반환합니다. |
+
+</details>
+
+`A`가 유효한 메타데이터 키가 아니면 오류 문자열로 대체됩니다.
 
 ### `{{hiddenkey::A}}`
 
-This works as a hidden key for activating lorebook entries while keeping `A` out of the model request.
+`A`를 모델 요청에는 포함하지 않으면서 로어북 항목을 활성화하기 위한 숨겨진 키로 동작합니다.
 
 ### `{{// A}}`
 
-This is a comment syntax. It can be used to comment out CBS code.
+주석 구문입니다. CBS 코드를 주석 처리하는 데 사용할 수 있습니다.
 
 ### `{{comment::A}}`
 
-This is a visible comment syntax. Unlike `{{// A}}`, the comment content is displayed in the chat.
+표시되는 주석 구문입니다. `{{// A}}`와 달리 주석 내용이 채팅에 표시됩니다.
 
 ### Escaping Syntaxes
 
@@ -762,81 +793,81 @@ This is a visible comment syntax. Unlike `{{// A}}`, the comment content is disp
 
 > Alias: `{{blank}}`
 
-This will be replaced with an empty string. Useful for removing the default text.
+빈 문자열로 대체됩니다. 기본 텍스트를 제거할 때 유용합니다.
 
-If its used in first message, the first message will work as if it not exists.
+첫 메시지에서 사용하면 첫 메시지가 존재하지 않는 것처럼 동작합니다.
 
 ### `{{br}}`
 
 > Alias: `{{newline}}`
 
-This will be replaced with a line break.
+줄바꿈으로 대체됩니다.
 
 ### `{{cbr}}`
 
 > Alias: `{{cnl}}`, `{{cnewline}}`
 
-This will be replaced with a line break character `\n` without actually creating a new line in the output.
+출력에서 실제 줄을 바꾸지 않고 줄바꿈 문자 `\n`으로 대체됩니다.
 
 ### `{{displayescapedcurlybracketopen}}`
 
 > Alias: `{{decbo}}`
 
-This will be replaced with a special character that displays as `{` but is not parsed as CBS syntax.
+`{`처럼 표시되지만 CBS 구문으로 파싱되지 않는 특수 문자로 대체됩니다.
 
 ### `{{displayescapedcurlybracketclose}}`
 
 > Alias: `{{decbc}}`
 
-This will be replaced with a special character that displays as `}` but is not parsed as CBS syntax.
+`}`처럼 표시되지만 CBS 구문으로 파싱되지 않는 특수 문자로 대체됩니다.
 
 ### `{{doubledisplayescapedcurlybracketopen}}`
 
 > Alias: `{{ddecbo}}`, `{{bo}}`
 
-This will be replaced with special characters that display as `{{` but are not parsed as CBS syntax.
+`{{`처럼 표시되지만 CBS 구문으로 파싱되지 않는 특수 문자로 대체됩니다.
 
 ### `{{doubledisplayescapedcurlybracketclose}}`
 
 > Alias: `{{ddecbc}}`, `{{bc}}`
 
-This will be replaced with special characters that display as `}}` but are not parsed as CBS syntax.
+`}}`처럼 표시되지만 CBS 구문으로 파싱되지 않는 특수 문자로 대체됩니다.
 
 ### `{{displayescapedbracketopen}}`
 
 > Alias: `{{debo}}`, `{{(}}`
 
-This will be replaced with a special character that displays as `(` without interfering with parsing.
+파싱에 영향을 주지 않으면서 `(`처럼 표시되는 특수 문자로 대체됩니다.
 
 ### `{{displayescapedbracketclose}}`
 
 > Alias: `{{debc}}`, `{{)}}`
 
-This will be replaced with a special character that displays as `)` without interfering with parsing.
+파싱에 영향을 주지 않으면서 `)`처럼 표시되는 특수 문자로 대체됩니다.
 
 ### `{{displayescapedanglebracketopen}}`
 
 > Alias: `{{deabo}}`, `{{<}}`
 
-This will be replaced with a special character that displays as `<` without interfering with HTML parsing.
+HTML 파싱에 영향을 주지 않으면서 `<`처럼 표시되는 특수 문자로 대체됩니다.
 
 ### `{{displayescapedanglebracketclose}}`
 
 > Alias: `{{deabc}}`, `{{>}}`
 
-This will be replaced with a special character that displays as `>` without interfering with HTML parsing.
+HTML 파싱에 영향을 주지 않으면서 `>`처럼 표시되는 특수 문자로 대체됩니다.
 
 ### `{{displayescapedcolon}}`
 
 > Alias: `{{dec}}`, `{{:}}`
 
-This will be replaced with a special character that displays as `:` but is not parsed as a CBS argument separator.
+`:`처럼 표시되지만 CBS 인수 구분자로 파싱되지 않는 특수 문자로 대체됩니다.
 
 ### `{{displayescapedsemicolon}}`
 
 > Alias: `{{;}}`
 
-This will be replaced with a special character that displays as `;` without interfering with parsing.
+파싱에 영향을 주지 않으면서 `;`처럼 표시되는 특수 문자로 대체됩니다.
 
 ### Rendering Syntaxes
 
@@ -844,37 +875,38 @@ This will be replaced with a special character that displays as `;` without inte
 
 > Alias: `{{latex::A}}`, `{{katex::A}}`
 
-This will render `A` as a LaTeX math expression.
+`A`를 LaTeX 수식으로 렌더링합니다.
 
 ### `{{ruby::A::B}}`
 
 > Alias: `{{furigana::A::B}}`
 
-This will render ruby text for East Asian typography. `A` is the base text and `B` is the ruby text.
+동아시아 타이포그래피용 ruby 텍스트를 렌더링합니다. `A`는 기준 텍스트이고 `B`는 ruby 텍스트입니다.
 
 ### `{{codeblock::A}}`
 
-This will render `A` as a code block.
+`A`를 코드 블록으로 렌더링합니다.
 
 ### `{{codeblock::A::B}}`
 
-This will render `B` as a code block with language `A` for syntax highlighting.
+`B`를 코드 블록으로 렌더링하고, `A`를 문법 강조용 언어로 사용합니다.
 
 ### `{{bkspc}}`
 
-This removes the last word from the current output.
+현재 출력에서 마지막 단어를 제거합니다.
 
 ### `{{erase}}`
 
-This removes the last sentence from the current output.
+현재 출력에서 마지막 문장을 제거합니다.
 
 ## Block Syntaxes
 
 ### `{{#if A}}`
 
+`A`가 `1`이면 블록 내용을 포함하고, 그렇지 않으면 블록 내용을 제외합니다.
 This will be replaced with the `content` if `A` is `1`, otherwise it will be replaced with an empty string.
 
-Example:
+예시:
 ```
 {{#if {{equal::1::1}}}}
 Hello Alice!
@@ -883,25 +915,24 @@ Hello Alice!
 
 ### `{{#if_pure A}}`
 
-Same as `{{#if A}}`, but it would keep the indentation and whitespace of the content.
-
+`{{#if A}}`와 동일하지만, 블록 내용의 들여쓰기와 공백을 유지합니다.
 
 ### `{{#each A as B}}`
 
-Parses `A` as an array and repeats the block content for each element. Inside the block, `{{slot::B}}` is replaced with the current element.
+`A`를 배열로 파싱하고, 블록 내용을 각 요소에 대해 반복합니다. 블록 안에서 `{{slot::B}}`는 현재 요소로 대체됩니다.
 
-Compatibility form `{{#each A B}}` is also supported, but `{{#each A as B}}` is preferred.
+호환성을 위해 `{{#each A B}}` 구문도 지원하지만, `{{#each A as B}}`를 추천합니다.
 
-Use `{{#each::keep A as B}}` to preserve whitespace inside the block.
+`{{#each::keep A as B}}`를 사용하여 블록 안의 공백을 유지할 수 있습니다.
 
-Example:
+예시:
 ```
 {{#each {{array::chicken::pizza::hamburger}} as item}}
 {{slot::item}}
 {{/each}}
 ```
 
-will be replaced with
+출력:
 ```
 chickenpizzahamburger
 ```
@@ -914,11 +945,11 @@ chickenpizzahamburger
 
 ### `{{#func A}}`
 
-This defines a function block named `A`. The block can be called with `{{call::A::B::C...}}`.
+`A`라는 이름의 함수 블록을 정의합니다. 블록은 `{{call::A::B::C...}}`로 호출할 수 있습니다.
 
-Inside the function block, use `{{arg::N}}` to read an argument passed by `{{call}}`. `{{arg::0}}` is the function name, so user-provided arguments start from `{{arg::1}}`.
+함수 블럭 내에서 `{{arg::N}}`을 사용하여 `{{call}}`로 전달된 인수를 읽을 수 있습니다. `{{arg::0}}`은 함수 이름이고, 사용자 제공 인수는 `{{arg::1}}`부터 시작합니다.
 
-Example:
+예시:
 ```
 {{#func greet}}
 Hello, {{arg::1}}!
@@ -926,35 +957,36 @@ Hello, {{arg::1}}!
 {{call::greet::Alice}}
 ```
 
-Output:
+출력:
 ```
 Hello, Alice!
 ```
 
 ### `{{#pure_display}}`
 
-This will be replaced with the `content` without any formatting. This is useful for displaying raw text.
+`content`를 어떠한 형식도 없이 표시합니다. 원본 텍스트을 그대로 보여주고 싶을 때 유용합니다.
 
 ### `{{#when A}}`
 
-This will include the block content if `A` is truthy. `1` and `true` are treated as true; other values are treated as false.
+`A`가 참이면 블록 내용을 포함하고, 그렇지 않으면 블록 내용을 제외합니다. `1`과 `true`는 참으로 간주되고, 다른 값은 거짓으로 간주됩니다.
 
+`#when`은 `and`, `or`, `is`, `isnot`, `>`, `<`, `>=`, `<=`, `not` 등의 연산자를 `::`와 함께 사용할 수도 있습니다.
 `#when` can also use operators with `::`, such as `and`, `or`, `is`, `isnot`, `>`, `<`, `>=`, `<=`, and `not`.
 
-Example:
+예시:
 ```
 {{#when::A::and::B}}
 Content
 {{/when}}
 ```
 
-Advanced operators include `keep` for preserving whitespace, `legacy` for old `#if`-style whitespace handling, `var` for checking a variable, and `toggle` for checking a toggle.
+고급 연산자로는 블록 안의 공백을 유지하는 `keep`, 예전 `#if` 방식으로 공백을 처리하는 `legacy`, 변수를 검사하는 `var`, 토글 상태를 검사하는 `toggle`이 있습니다.
 
 ### `{{:else}}`
 
-This is an else branch for `{{#when}}`. It is used inside a `#when` block.
+`{{#when}}` 전용 else 분기입니다. `#when` 블록 안에서 사용됩니다.
 
-Example:
+예시:
 ```
 {{#when A}}
 If A is true
@@ -965,16 +997,16 @@ If A is false
 
 ### `{{#escape}}`
 
-This will treat the block content as literal text by escaping curly braces and parentheses, so CBS syntax inside the block is not evaluated.
+블록 내용을 일반 텍스트처럼 처리합니다. 중괄호와 괄호를 이스케이프하므로 블록 안의 CBS 구문은 실행되지 않습니다.
 
-Use `{{#escape::keep}}` to preserve whitespace inside the block.
+블록 안의 공백을 유지하려면 `{{#escape::keep}}`을 사용하세요.
 
 ### `{{#puredisplay}}`
 
-This is useful for displaying raw CBS syntax, HTML, or other content without parsing.
+CBS 구문, HTML, 기타 내용을 파싱하지 않고 그대로 표시할 때 유용합니다.
 
 ### `{{#pure}}`
 
-This displays the block content without CBS processing.
+블록 내용을 CBS 처리 없이 표시합니다.
 
-This is an old syntax and is deprecated. Use `{{#puredisplay}}` instead.
+오래된 구문이며 더 이상 권장되지 않습니다. 대신 `{{#puredisplay}}`를 사용하세요.
