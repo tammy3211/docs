@@ -1,34 +1,34 @@
-# Markdown
+# Markdown (마크다운)
 
-On Risuai, you can use Markdown to format your text. Markdown is a easy-to-read and easy-to-write syntax for styling text. We follow the CommonMark specification for Markdown.
+RisuAI에서는 마크다운을 사용하여 텍스트를 서식화할 수 있습니다. 마크다운은 텍스트 스타일링을 위한 읽기 쉽고 쓰기 쉬운 구문입니다. CommonMark의 마크다운 양식을 따릅니다.
 
-## Supported
+## 지원 양식
 
 | Element | Syntax | Output |
 | ----------- | ----------- | ----------- |
-| Bold | `**bold text**` | **bold text** |
-| Italic | `*italic text*` | *italic text* |
-| Strikethrough | `~~strikethrough text~~` | ~~strikethrough text~~ |
-| Ordered List | `1. First item`<br>`2. Second item` | 1. First item<br>2. Second item |
-| Unordered List | `- First item`<br>`- Second item` | - First item<br>- Second item |
-| Code | `` `code` `` | `code` |
-| Link | `[text](url)` | [text](/syntax/markdown.md) |
+| Bold | `**굵은 텍스트**` | **굵은 텍스트** |
+| Italic | `*기울어진 텍스트*` | *기울어진 텍스트* |
+| Strikethrough | `~~취소선~~` | ~~취소선~~ |
+| Ordered List | `1. 1번째 항목`<br>`2. 2번째 항목` | 1. 1번째 항목<br>2. 2번째 항목 |
+| Unordered List | `- 1번째 항목`<br>`- 2번째 항목` | - 1번째 항목<br>- 2번째 항목 |
+| Code | `` `코드` `` | `코드` |
+| Link | `[텍스트](url)` | [텍스트](/syntax/markdown.md) |
 | Horizontal Rule | `---` | (Not displayed on Docs) |
-| Heading | `# Heading 1`<br>`## Heading 2`<br>`### Heading 3` | (Not displayed on Docs) |
-| Table | `| Header 1 | Header 2 |`<br>`| ----------- | ----------- |`<br>`| Element 1 | Element 2 |` | (Not displayed on Docs) |
+| Heading | `# 머리말 1`<br>`## 머리말 2`<br>`### 머리말 3` | (Not displayed on Docs) |
+| Table | `| 제목 1 | 제목 2 |`<br>`| ----------- | ----------- |`<br>`| 요소 1 | 요소 2 |` | (Not displayed on Docs) |
 
-### Advanced Tips
+### 고급 팁
 
-- You can use HTML in Markdown. However, some tags and attributes are treated specially:
-    - `<style>`: The css inside this tag would be trimmed down to a safe subset of css properties and values. and class names would be renamed to prevent conflicts.
-    - `<iframe>`: If is a youtube video, it would be embedded in the chat. Otherwise, it would be removed.
-    - `class` attribute: The class names would be renamed to prevent conflicts. since the css's class names are renamed, the class names in the HTML tags would still work.
-    - `href` attribute: The attribute would be removed if it is not a valid URL.
-    - `translate` attribute: If the attribute is set to `no`, the element won't be translated.
-    - `risu-trigger` attribute: If the attribute is set, if the user clicks on the element, the trigger named in the attribute would be triggered.
-- Formatting is disabled right after HTML tags. You need to add a new line after the tag to enable formatting.
-- Backslashes are used to escape Markdown syntax. for example, `\~\~hello\~\~` will be displayed as `~~hello~~`, instead of strikethrough text ~~hello~~
-- `_` can be used instead of `*` for italic text, and `__` can be used instead of `**` for bold text.
-- Bold and Italic text can be combined. For example, `***bold and italic text***` will be displayed as ***bold and italic text***.
-- `![foo](/url "title")` can be used to add images. however, We recommend using the `{{image::assetId}}` syntax to add images instead.
-- URLs linking isn't supported due to security reasons.
+- 마크다운 안에서 HTML을 사용할 수 있습니다. 다만 일부 태그와 속성은 특별하게 처리됩니다.
+    - `<style>`: 태그 안의 CSS는 안전한 일부 CSS 속성과 값만 남도록 정리됩니다. 충돌을 방지하기 위해 클래스 이름도 변경됩니다.
+    - `<iframe>`: 유튜브 영상이면 채팅에 임베드됩니다. 그 외의 iframe은 제거됩니다.
+    - `class` 속성: 충돌을 방지하기 위해 클래스 이름이 변경됩니다. CSS의 클래스 이름도 함께 변경되므로 HTML 태그 안의 클래스는 계속 동작합니다.
+    - `href` 속성: 올바른 URL이 아니면 속성이 제거됩니다.
+    - `translate` 속성: 값이 `no`이면 해당 요소는 번역되지 않습니다.
+    - `risu-trigger` 속성: 이 속성이 있으면 사용자가 해당 요소를 클릭했을 때 속성에 적힌 이름의 트리거가 실행됩니다.
+- HTML 태그 바로 뒤에서는 마크다운 서식이 비활성화됩니다. 서식을 적용하려면 태그 뒤에 새 줄을 추가해야 합니다.
+- 백슬래시는 마크다운 문법을 이스케이프하는 데 사용됩니다. 예를 들어 `\~\~hello\~\~`는 취소선 텍스트 ~~hello~~가 아니라 `~~hello~~`로 표시됩니다.
+- 기울임에는 `*` 대신 `_`를 사용할 수 있고, 굵게에는 `**` 대신 `__`를 사용할 수 있습니다.
+- 굵게와 기울임은 함께 사용할 수 있습니다. 예를 들어 `***굵고 기울어진 텍스트***`는 ***굵고 기울어진 텍스트***로 표시됩니다.
+- 이미지는 `![foo](/url "title")`로 추가할 수 있습니다. 다만 이미지 추가에는 `{{image::assetId}}` 구문을 사용하는 것을 권장합니다.
+- 보안상의 이유로 URL 자동 링크는 지원되지 않습니다.
